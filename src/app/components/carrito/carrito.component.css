@@ -1,0 +1,44 @@
+#carrito_delete{
+ padding-inline: 25px;
+ padding-top: 8px;
+ padding-bottom: 8px;
+ border: 1px solid #31a0a1;
+ color: #1b7b7c;
+ font-weight: 500;
+ transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+
+#carrito_delete:hover{
+  background: #17696A;
+  color: white;
+  border: 1px solid #17696A;
+}
+
+#move_to_list{
+  color: #424551;
+  font-weight: 500;
+  font-size: 12px;
+  transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+#move_to_list:hover{
+  color: #1f8081;
+
+}
+
+#promo-code{
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0 0 rgba(78, 76, 76, 0);
+  transition: border-color .2s ease-in-out, background-color .2s ease-in-out, box-shadow .2s ease-in-out;
+  height: 50px !important;
+}
+#promo-code:focus{
+  border: 1px solid #44a0a1;
+  -webkit-box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
+-moz-box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
+box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
+}
+
+#promo-code::placeholder{
+  font-size: 17px;
+  color: #9A9CA5;
+}

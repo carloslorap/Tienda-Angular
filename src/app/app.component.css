@@ -1,0 +1,42 @@
+:host ::ng-deep .pagination {
+  --bs-pagination-padding-x: 0.75rem;
+  --bs-pagination-padding-y: 0.375rem;
+  --bs-pagination-font-size: 1rem;
+  --bs-pagination-color: #17696A !important;
+  --bs-pagination-bg: #17696A !important;
+  --bs-pagination-border-width: #17696A !important;
+  --bs-pagination-border-color: #17696A !important;
+  --bs-pagination-border-radius: #17696A !important;
+  --bs-pagination-hover-color: #17696A !important;
+  --bs-pagination-hover-bg: #17696A !important;
+  --bs-pagination-hover-border-color: #17696A !important;
+  --bs-pagination-focus-color: #17696A !important;
+  --bs-pagination-focus-bg: #17696A !important;
+  --bs-pagination-focus-box-shadow:#17696A !important;
+  --bs-pagination-active-color: #17696A !important;
+  --bs-pagination-active-bg: #17696A !important;
+  --bs-pagination-active-border-color: #17696A !important;
+  --bs-pagination-disabled-color: #17696A !important;
+  --bs-pagination-disabled-bg: #17696A !important;
+  --bs-pagination-disabled-border-color: #17696A !important;
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+}
+
+
+/* Estilos para los enlaces de la paginación de Bootstrap */
+:host ::ng-deep .page-link {
+  position: relative;
+  display: block;
+  padding: var(--bs-pagination-padding-y) var(--bs-pagination-padding-x);
+  font-size: var(--bs-pagination-font-size);
+  color: #328081 !important; /* Color del texto */
+  text-decoration: none;
+  background-color: transparent ; /* Color de fondo */
+  border: none !important;
+
+}
+
+
+

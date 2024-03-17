@@ -1,0 +1,170 @@
+<app-nav></app-nav>
+
+
+<main class="cs-page-wrapper">
+
+
+  <!-- Promo bar -->
+  <section class="cs-promo-bar" style="background-color: #17696A; height: 30px;">
+    <div class="container d-flex justify-content-center">
+      <div class="cs-carousel cs-controls-inverse">
+        <div class="cs-carousel-inner" data-carousel-options = '{"mode": "gallery", "nav": false}'>
+          <div class="font-size-xs text-light px-2">
+            <strong class="mr-1">Up to 70% Off.</strong>
+            <a href="#" class="text-light">Shop our latest sale offers</a>
+          </div>
+          <div class="font-size-xs text-light px-2">
+            <strong class="mr-1">Money back guarantee.</strong>
+            <a href="#" class="text-light">Learn more</a>
+          </div>
+          <div class="font-size-xs text-light px-2">
+            <strong class="mr-1">Friendly customer support.</strong>
+            <a href="#" class="text-light">Contact 24/7</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <nav class="mb-3" style="background: #f3f3f3; padding: 8px;" aria-label="breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb breadcrumb-alt mb-0">
+        <li class="breadcrumb-item">
+          <a href="index.html"><i class="cxi-home"></i></a>
+        </li>
+
+        <li class="breadcrumb-item active" aria-current="page">Mi lista de deseo</li>
+      </ol>
+    </div>
+  </nav>
+
+
+  <!-- Page container -->
+  <section class="container pt-3 pt-lg-4 pb-5 pb-lg-6">
+    <div class="row pb-2 pb-lg-0">
+
+      <!-- Account menu (sticky sidebar) -->
+      <aside class="col-xl-3 col-lg-4 pb-3 mb-4 mb-lg-0">
+        <app-sidebar></app-sidebar>
+      </aside>
+
+
+      <!-- Content -->
+      <div class="col-lg-8 ml-auto">
+        <div class="d-flex align-items-center justify-content-between mb-4 pb-1 pb-sm-3">
+          <h1 class="h2 mb-0">Mi Perfil</h1>
+        </div>
+
+
+          <div class="row mx-n2">
+
+            <!-- <div class="col-md-4 col-sm-6 px-2 pb-4 mb-2">
+              <div class="card card-product mx-auto">
+                <div class="card-product-img">
+                  <a href="shop-single.html" class="card-img-top">
+                    <img src="../assets/img/ecommerce/shop/01.jpg" alt="Product image">
+                  </a>
+                  <div class="card-product-widgets-top">
+                    <span class="badge product-badge badge-danger" >-50%</span>
+                    <div class="star-rating ml-auto">
+                      <i class="sr-star cxi-star-filled active"></i>
+                      <i class="sr-star cxi-star-filled active"></i>
+                      <i class="sr-star cxi-star-filled active"></i>
+                      <i class="sr-star cxi-star-filled active"></i>
+                      <i class="sr-star cxi-star-filled active"></i>
+                    </div>
+                  </div>
+                  <div class="card-product-widgets-bottom">
+                    <i class="cxi-heart" style="cursor: pointer; margin-left: 13.5rem;"></i>
+                  </div>
+                </div>
+                <div class="card-body pb-2">
+                  <h3 class="card-product-title text-truncate mb-2">
+                    <a href="shop-single.html" class="nav-link">Shirt with insertion lace trims</a>
+                  </h3>
+                  <div class="d-flex align-items-center">
+                    <span class="h5 d-inline-block text-danger mb-0">$ 400</span>
+                    <del class="d-inline-block ml-2 pl-1 text-muted">$ 600</del>
+                  </div>
+                </div>
+                <div class="card-footer">
+
+                  <button type="button" class="btn btn-primary w-100">
+                    <i class="ci-cart align-middle mt-n1 me-2"></i>
+                    Add to cart
+                  </button>
+                </div>
+              </div>
+            </div> -->
+
+
+
+            <div class="col-md-4 col-sm-6 px-2 pb-4 mb-2" *ngFor="let item of wishlist_arr">
+              <div class="card card-product mx-auto" style="border: none !important;">
+                <div class="card-product-img">
+                  <a href="shop-single.html" class="card-img-top">
+                    <img [src]="url + 'obtener_portada/' + item.producto.portada" alt="Product image">
+                  </a>
+                  <div class="card-product-widgets-top">
+                    <span class="badge product-badge badge-danger" style="padding: 10px; font-size: 15px;" *ngIf="descuento_activo && descuento_activo.categoria === item.producto.categoria">-{{descuento_activo.descuento}}%</span>
+                    <div class="star-rating ml-auto">
+                      <i class="sr-star cxi-star-filled active"></i>
+                      <i class="sr-star cxi-star-filled active"></i>
+                      <i class="sr-star cxi-star-filled active"></i>
+                      <i class="sr-star cxi-star-filled active"></i>
+                      <i class="sr-star cxi-star-filled active"></i>
+                    </div>
+                  </div>
+                  <div class="card-product-widgets-bottom">
+                    <i class="cxi-heart" *ngIf="!item.producto.isInWishlist" style="cursor: pointer; margin-left: 13rem;"></i>
+                  <i class="cxi-heart-filled ci-heart-filled" *ngIf="item.producto.isInWishlist" style="cursor: pointer; margin-left: 13rem; color: #03CEA4;" (click)="eliminarWishlist(item.producto)"></i>
+                  </div>
+                </div>
+                <div class="card-body pb-2">
+                  <h3 class="card-product-title text-truncate mb-2">
+                    <a href="shop-single.html" class="nav-link">{{item.producto.titulo}}</a>
+                  </h3>
+                  <ng-container *ngIf="descuento_activo && descuento_activo.categoria != item.producto.categoria">
+                  <div class="d-flex align-items-center">
+                    <span class="h5 d-inline-block mb-0">${{item.producto.precio}}</span>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="descuento_activo && descuento_activo.categoria === item.producto.categoria">
+                  <div class="d-flex align-items-center">
+                    <span class="h5 d-inline-block mb-0" style="color: #FF4242;">$ {{item.producto.precio | descuento: descuento_activo.descuento}}</span>
+                    <del class="d-inline-block ml-2 pl-1 text-muted">$ {{item.producto.precio}}</del>
+                  </div>
+                </ng-container>
+                </div>
+                <div class="card-footer">
+                  <ng-container *ngIf="item.producto.stock >= 1">
+                    <button type="button" class="btn w-100" style="background-color: #17696A; border: #17696A; padding: 11px; color: white;" (click)="agregar_producto(item.producto)">
+                      <i class="cxi-cart align-middle mt-n1 mr-2"></i>
+                      Add to cart
+                    </button>
+                  </ng-container>
+                  <ng-container *ngIf="item.producto.stock == 0">
+                    <button type="button" class="btn w-100" style="background: #D1D1D4; cursor:not-allowed; padding: 11px;">
+                      <i class="cxi-alert-octagon align-middle mt-n1 mr-2"></i>
+                      Agotado
+                    </button>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+      </div>
+
+
+
+
+    </div>
+  </section>
+</main>
+
+
+<app-footer></app-footer>

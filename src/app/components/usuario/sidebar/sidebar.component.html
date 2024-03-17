@@ -1,0 +1,46 @@
+<!-- Account menu (sticky sidebar) -->
+
+<div class="sidebar-sticky" data-sidebar-sticky-options='{
+  "topSpacing": 120,
+  "minWidth": 991
+}'>
+  <div class="sidebar-sticky-inner">
+    <div class="card" style="border-color: #e6e5e5;">
+      <div class="card-body" *ngIf="user_lc">
+        <h5 class="card-title mb-1" style="margin-left: 10px;margin-top: 7px;">{{user_lc.nombres}}</h5>
+        <p class="card-text text-muted mb-lg-0" style="margin-left: 10px;  margin-top: 8px; margin-bottom: 8px;" >{{user_lc.email}}</p>
+        <a href="#account-menu" class="btn btn-primary btn-block d-lg-none" data-toggle="collapse">Account Menu</a>
+      </div>
+      <div id="account-menu" class="collapse d-lg-block">
+        <div class="list-group list-group-flush border-top">
+          <a [routerLink]="['/cuenta/perfil']" routerLinkActive="active" class="list-group-item list-group-item-action d-flex align-items-center">
+            <i class="cxi-profile font-size-lg mr-2" style="margin-left: 10px; margin-top: 8px; margin-bottom: 8px;"></i>
+            <span>Mi perfil</span>
+          </a>
+          <a [routerLink]="['/cuenta/direcciones']" routerLinkActive="active" class="list-group-item list-group-item-action d-flex align-items-center">
+            <i class="cxi-bag font-size-lg mr-2" style="margin-left: 10px; margin-top: 8px; margin-bottom: 8px;"></i>
+            <span>Mis direcciones</span>
+          </a>
+          <a [routerLink]="['/cuenta/ordenes']" routerLinkActive="active" class="list-group-item list-group-item-action d-flex align-items-center">
+            <i class="cxi-bag font-size-lg mr-2" style="margin-left: 10px; margin-top: 8px; margin-bottom: 8px;"></i>
+            <span>Mis ordenes</span>
+          </a>
+          <a [routerLink]="['/wish-list']" routerLinkActive="active" class="list-group-item list-group-item-action d-flex align-items-center">
+            <i class="cxi-heart font-size-lg mr-2" style="margin-left: 10px; margin-top: 8px; margin-bottom: 8px;"></i>
+            <span>Lista de favoritos</span>
+            <span class="badge badge-warning ml-auto">{{wishlist_arr.length}}</span>
+          </a>
+
+          <a href="account-reviews.html" class="list-group-item list-group-item-action d-flex align-items-center">
+            <i class="cxi-star font-size-lg mr-2" style="margin-left: 10px; margin-top: 8px; margin-bottom: 8px;"></i>
+            <span>My reviews</span>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action d-flex align-items-center">
+            <i class="cxi-logout font-size-lg mr-2" style="margin-left: 10px; margin-top: 8px; margin-bottom: 8px;"></i>
+            <span>Sign out</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

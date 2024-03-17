@@ -1,0 +1,398 @@
+<header class="cs-header">
+  <!-- Navbar -->
+  <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page -->
+  <div
+    class="navbar navbar-expand-lg navbar-light bg-light navbar-sticky"
+    data-fixed-element
+  >
+    <div class="container px-0 px-xl-3">
+      <a href="index.html" class="navbar-brand order-lg-1 mr-0 pr-lg-3 mr-lg-4">
+        <img
+          src="assets/img/ecommerce/logo.svg"
+          alt="Createx Logo"
+          width="130"
+        />
+      </a>
+
+      <!-- Search desktop -->
+      <!-- <div
+        class="input-group-overlay ml-4 d-lg-block d-none order-lg-3"
+        style="max-width: 21rem"
+      >
+        <input
+          class="form-control appended-form-control"
+          type="text"
+          placeholder="Search for products..."
+        />
+        <div class="input-group-append-overlay">
+          <span class="input-group-text"
+            ><i class="cxi-search lead align-middle"></i
+          ></span>
+        </div>
+      </div> -->
+      <div
+        class="input-group-overlay ml-4 d-lg-block d-none order-lg-3"
+        style="max-width: 21rem"
+      >
+      <input
+       [(ngModel)]="selected"
+       [typeahead]="productTitles"
+       [isAnimated]="true"
+       id="buscador_nav"
+       autocomplete="off"
+       class="form-control appended-form-control"
+       value="selected"
+       (typeaheadOnSelect)="onProductClick($event)"
+       placeholder="Search for products...">
+
+
+        <div class="input-group-append-overlay">
+          <span class="input-group-text"
+            ><i class="cxi-search lead align-middle"></i
+          ></span>
+        </div>
+      </div>
+      <!-- Toolbar -->
+      <div class="d-flex align-items-center order-lg-3">
+        <ul class="nav nav-tools flex-nowrap">
+          <ng-container *ngIf="user_lc == undefined">
+            <li class="nav-item d-lg-block d-none mb-0">
+              <a [routerLink]="['/login']" class="nav-tool">
+                <i class="cxi-profile nav-tool-icon"></i>
+                <span class="nav-tool-label">Iniciar sesion</span>
+              </a>
+            </li>
+          </ng-container>
+          <ng-container *ngIf="user_lc">
+            <li class="nav-item d-lg-block d-none dropdown">
+              <a
+                [routerLink]="['/']"
+                class="nav-tool dropdown-toggle"
+                data-toggle="dropdown"
+              >
+                <i class="cxi-profile nav-tool-icon"></i>
+                <span class="nav-tool-label">{{ user_lc.nombres }}</span>
+              </a>
+              <div class="dropdown-menu" style="margin-top: 5px">
+                <a [routerLink]="['/cuenta/perfil']" class="dropdown-item">
+                  <i class="cxi-profile mx-2"></i>
+                  Perfil
+                  <!-- <span class="badge rounded-pill bg-danger ms-2">3</span> -->
+                </a>
+                <a [routerLink]="['/wish-list']" class="dropdown-item">
+
+                  <i class="cxi-heart mx-2"></i>
+                  Favoritos
+                  <span class="badge rounded-pill ms-2" style="color: white; background: #03CEA4;">{{wishlist_arr.length}}</span>
+                </a>
+                <a
+                  style="cursor: pointer"
+                  class="dropdown-item"
+                  (click)="logout()"
+                >
+                  <i class="cxi-external-link mx-2"></i>
+                  Cerrar sesion
+                </a>
+              </div>
+            </li>
+          </ng-container>
+
+          <li class="divider-vertical mb-0 d-lg-block d-none"></li>
+          <li class="nav-item align-self-center mb-0">
+            <a
+              style="cursor: pointer;"
+              class="nav-tool pr-lg-0"
+              (click)="op_modal_cart()"
+            >
+              <i class="cxi-cart nav-tool-icon"></i>
+              <span
+                class="badge badge-success align-middle mt-n1 ml-2 px-2 py-1 font-size-xs"
+                >{{carrito_arr.length}}</span
+              >
+            </a>
+          </li>
+          <li class="divider-vertical mb-0 d-lg-none d-block"></li>
+          <li class="nav-item mb-0">
+            <button
+              class="navbar-toggler mt-n1 mr-n3"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarCollapse"
+              aria-expanded="false"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </li>
+        </ul>
+      </div>
+      <!-- Navbar collapse -->
+      <nav class="collapse navbar-collapse order-lg-2" id="navbarCollapse">
+        <!-- Search mobile -->
+        <div class="input-group-overlay form-group mb-0 d-lg-none d-block">
+          <input
+            type="text"
+            class="form-control prepended-form-control rounded-0 border-0"
+            placeholder="Search for products..."
+          />
+          <div class="input-group-prepend-overlay">
+            <span class="input-group-text">
+              <i class="cxi-search font-size-lg align-middle mt-n1"></i>
+            </span>
+          </div>
+        </div>
+        <!-- Menu -->
+        <ul class="navbar-nav mr-auto">
+          <li
+            class="nav-item"
+            [routerLink]="['/']"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            style="cursor: pointer; margin-right: 12px;"
+          >
+            <a class="nav-link" style="font-weight: 600;">Inicio</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              [routerLink]="['/productos']"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              style="cursor: pointer; font-weight: 600; margin-right: 12px;"
+              class="nav-link dropdown-toggle"
+              data-toggle="dropdown"
+              >Tienda</a
+            >
+            <ul class="dropdown-menu">
+              <li *ngFor="let item of config_global.categorias">
+                <a [routerLink]="['/productos/categoria/',item.titulo.toLowerCase()]" class="dropdown-item"
+                  ><i class="{{ item.icono }}" style="margin-right: 12px"></i
+                  >{{ item.titulo }}</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown mega-dropdown">
+            <a href="#" class="nav-link dropdown-toggle" style="font-weight: 600; margin-right: 12px; " data-toggle="dropdown"
+              >Megamenu</a
+            >
+            <div class="dropdown-menu">
+              <div class="container pt-lg-1 pb-lg-3">
+                <div class="row">
+                  <div class="col-lg-2 col-md-3 py-2">
+                    <ul class="list-unstyled">
+                      <li>
+                        <a href="#" class="dropdown-item">New collection</a>
+                      </li>
+                      <li>
+                        <a href="#" class="dropdown-item">Best sellers</a>
+                      </li>
+                      <li><a href="#" class="dropdown-item">Plus size</a></li>
+                      <li>
+                        <a href="#" class="dropdown-item text-danger"
+                          >Sale up to 70%</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-lg-2 col-md-3 py-2">
+                    <h4 class="font-size-sm text-uppercase pt-1 mb-2">
+                      Clothes
+                    </h4>
+                    <ul class="list-unstyled">
+                      <li><a href="#" class="dropdown-item">Coats</a></li>
+                      <li><a href="#" class="dropdown-item">Jackets</a></li>
+                      <li><a href="#" class="dropdown-item">Suits</a></li>
+                      <li><a href="#" class="dropdown-item">Dresses</a></li>
+                      <li>
+                        <a href="#" class="dropdown-item"
+                          >Cardigans &amp; sweaters</a
+                        >
+                      </li>
+                      <li>
+                        <a href="#" class="dropdown-item"
+                          >Sweatshirts &amp; hoodies</a
+                        >
+                      </li>
+                      <li>
+                        <a href="#" class="dropdown-item"
+                          >T-shirts &amp; tops</a
+                        >
+                      </li>
+                      <li><a href="#" class="dropdown-item">Pants</a></li>
+                      <li><a href="#" class="dropdown-item">Jeans</a></li>
+                      <li><a href="#" class="dropdown-item">Shorts</a></li>
+                      <li><a href="#" class="dropdown-item">Skirts</a></li>
+                      <li>
+                        <a href="#" class="dropdown-item"
+                          >Lingerie &amp; nightwear</a
+                        >
+                      </li>
+                      <li><a href="#" class="dropdown-item">Sportswear</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-lg-2 col-md-3 py-2">
+                    <h4 class="font-size-sm text-uppercase pt-1 mb-2">Shoes</h4>
+                    <ul class="list-unstyled">
+                      <li><a href="#" class="dropdown-item">Boots</a></li>
+                      <li><a href="#" class="dropdown-item">Flat shoes</a></li>
+                      <li><a href="#" class="dropdown-item">Heels</a></li>
+                      <li><a href="#" class="dropdown-item">Sandals</a></li>
+                      <li><a href="#" class="dropdown-item">Mules</a></li>
+                      <li><a href="#" class="dropdown-item">Sliders</a></li>
+                      <li><a href="#" class="dropdown-item">Slippers</a></li>
+                      <li><a href="#" class="dropdown-item">Sneakers</a></li>
+                      <li><a href="#" class="dropdown-item">Leather</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-lg-2 col-md-3 py-2">
+                    <h4 class="font-size-sm text-uppercase pt-1 mb-2">
+                      Accessories
+                    </h4>
+                    <ul class="list-unstyled">
+                      <li>
+                        <a href="#" class="dropdown-item"
+                          >Bags &amp; backpacks</a
+                        >
+                      </li>
+                      <li>
+                        <a href="#" class="dropdown-item">Hats &amp; scarves</a>
+                      </li>
+                      <li>
+                        <a href="#" class="dropdown-item">Hair accessories</a>
+                      </li>
+                      <li><a href="#" class="dropdown-item">Belts</a></li>
+                      <li><a href="#" class="dropdown-item">Jewellery</a></li>
+                      <li><a href="#" class="dropdown-item">Watches</a></li>
+                      <li><a href="#" class="dropdown-item">Sunglasses</a></li>
+                      <li><a href="#" class="dropdown-item">Purses</a></li>
+                      <li>
+                        <a href="#" class="dropdown-item">Socks &amp; tights</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-lg-1 d-none d-lg-block py-2">
+                    <span class="divider-vertical h-100 mx-auto"></span>
+                  </div>
+                  <div class="col-lg-3 d-none d-lg-block py-2">
+                    <a href="#" class="d-block text-decoration-none pt-1">
+                      <img
+                        src="assets/img/ecommerce/megamenu.jpg"
+                        class="d-block rounded mb-3"
+                        alt="Promo banner"
+                      />
+                      <h5 class="font-size-sm mb-3" style="color: rgb(61, 61, 61);">
+                        Back to school. Sale up to 50%
+                      </h5>
+                      <div class="btn btn-sm" id="see_offers">
+                        See offers
+                        <i class="cxi-arrow-right ml-1"></i>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li
+          class="nav-item"
+          [routerLink]="['/contacto']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          style="cursor: pointer"
+        >
+          <a class="nav-link" style="font-weight: 600; margin: 0;">Contacto</a>
+        </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+
+
+
+
+
+<div id="cart" class="cs-offcanvas cs-offcanvas-right">
+
+  <!-- Header -->
+  <div class="cs-offcanvas-cap align-items-center border-bottom">
+    <h2 class="h5 mb-0">Your cart ({{carrito_arr.length}})</h2>
+
+    <button class="close mr-n1" type="button" data-dismiss="offcanvas" aria-label="Close" (click)="op_modal_cart()">
+      <span class="h3 font-weight-normal mb-0" aria-hidden="true" >×</span>
+    </button>
+  </div>
+
+  <!-- Body -->
+  <div class="cs-offcanvas-body">
+    <!-- Item -->
+    <div class="media p-4 border-bottom mx-n4" *ngFor="let item of carrito_arr">
+      <a href="shop-single.html" style="min-width: 80px;">
+        <img  [src]="url + 'obtener_portada/' + item.producto.portada" width="80" alt="Product thumb">
+      </a>
+      <div class="media-body pl-3">
+        <div class="d-flex justify-content-between">
+          <div class="pr-2">
+            <h3 class="font-size-sm mb-3">
+              <a href="shop-single.html" class="nav-link font-weight-bold">{{item.producto.titulo}}</a>
+            </h3>
+            <ul class="list-unstyled font-size-xs mt-n2 mb-2">
+              <li class="mb-0"><span class="text-muted">{{item.producto.titulo_variedad}}:</span> {{item.variedad}}</li>
+
+            </ul>
+            <!-- <div class="d-flex align-items-center">
+              <input type="number" class="form-control form-control-sm bg-light mr-3" readonly style="width: 4.5rem;" value="{{item.cantidad}}">
+
+              <div class="text-nowrap" *ngIf="descuento_activo != undefined">
+                <strong class="text-danger" style="margin-right: 10px;">$ {{item.producto.precio | descuento:descuento_activo.descuento}}</strong>
+                <s class="font-size-xs text-muted">${{item.producto.precio}}</s>
+              </div>
+              <div class="text-nowrap" *ngIf="descuento_activo == undefined">
+                <strong>$ {{item.producto.precio}}</strong>
+              </div>
+
+
+            </div> -->
+
+            <div class="d-flex align-items-center">
+              <input type="number" class="form-control form-control-sm bg-light mr-3" id="nav_cantidad" readonly style="width: 4.5rem; background: #ffffff !important;" value="{{item.cantidad}}">
+
+              <div class="text-nowrap" *ngIf="descuento_activo != undefined && descuento_activo.categoria !== item.producto.categoria">
+                <strong>$ {{item.producto.precio * item.cantidad}}</strong>
+              </div>
+
+              <div class="text-nowrap" *ngIf="descuento_activo != undefined && descuento_activo.categoria === item.producto.categoria">
+                <strong style="margin-right: 10px;color: #FF4242;">$ {{item.producto.precio * item.cantidad | descuento:descuento_activo.descuento}}</strong>
+                <s class="font-size-xs text-muted">${{item.producto.precio}}</s>
+              </div>
+            </div>
+
+            <button class="btn btn-link btn-sm text-decoration-none px-0 pb-0" id="mover_ala_lista_de_deseo" (click)="agregar_wishlist(item.producto)">
+              Mover a la lista de deseo
+              <i class="cxi-heart ml-1"></i>
+            </button>
+          </div>
+          <div class="nav-muted mr-n2">
+            <a style="cursor: pointer;" title="Quitar" (click)="eliminar_item(item._id)" class="nav-link px-2 mt-n2" data-toggle="tooltip" title="" data-original-title="Remove"><i class="cxi-delete" style="color: red;"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+  <!-- Footer -->
+  <div class="cs-offcanvas-cap flex-column border-top">
+    <div class="d-flex align-items-center justify-content-between mb-3 pb-1">
+      <span class="text-muted mr-2">Subtotal:</span>
+      <span class="h5 mb-0">$ {{subtotal}}</span>
+    </div>
+    <a [routerLink]="['/carrito']" class="btn btn-lg btn-block" style="background-color: #17696A;border-radius: 0.25rem; border: #17696A; padding: 11px; color: white;">
+      <i class="cxi-credit-card font-size-lg mt-n1 mr-1"></i>
+      Checkout
+    </a>
+  </div>
+</div>

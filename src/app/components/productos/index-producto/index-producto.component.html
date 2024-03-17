@@ -1,0 +1,412 @@
+<app-nav></app-nav>
+
+
+<main class="cs-page-wrapper">
+
+    <!-- Promo bar -->
+    <section class="cs-promo-bar" style="background-color: #17696A; height: 30px;">
+      <div class="container d-flex justify-content-center">
+        <div class="cs-carousel cs-controls-inverse">
+          <div class="cs-carousel-inner" data-carousel-options = '{"mode": "gallery", "nav": false}'>
+            <div class="font-size-xs text-light px-2">
+              <strong class="mr-1">Up to 70% Off.</strong>
+              <a href="#" class="text-light">Shop our latest sale offers</a>
+            </div>
+            <div class="font-size-xs text-light px-2">
+              <strong class="mr-1">Money back guarantee.</strong>
+              <a href="#" class="text-light">Learn more</a>
+            </div>
+            <div class="font-size-xs text-light px-2">
+              <strong class="mr-1">Friendly customer support.</strong>
+              <a href="#" class="text-light">Contact 24/7</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+   <!-- Breadcrumb -->
+   <nav class="mb-3" aria-label="breadcrumb" style="background: #f3f3f3; padding: 8px;">
+    <div class="container">
+      <ol class="breadcrumb breadcrumb-alt mb-0" >
+        <li class="breadcrumb-item">
+          <a ><i class="cxi-home"></i></a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Todos los productos</li>
+      </ol>
+    </div>
+  </nav>
+
+
+  <!-- Page container -->
+  <section class="container pt-3 pb-5 pb-md-6 mb-2 mb-lg-0">
+
+    <!-- <div class="row mb-5" *ngIf="descuento_activo != undefined">
+      <div class="col-12">
+        <img [src]="url + 'obtener_banner_descuento/' + descuento_activo.banner" style="width: 100% !important;">
+      </div>
+    </div> -->
+
+    <!-- Toolbar + Pagination -->
+    <div class="row mb-4 pb-2">
+      <div class="col-md-3 pr-lg-4 mb-3 mb-md-0">
+
+        <!-- Show / hide filters on Desktop -->
+        <div class="d-none d-lg-block">
+          <h3><i class="cxi-filter-1"></i> Filtros:</h3>
+        </div>
+
+        <!-- Show / hide filters (off-canvas) on Mobile -->
+        <button type="button" class="btn btn-primary btn-block mt-0 d-lg-none" data-toggle="offcanvas" data-target="filtersOffcanvas">
+          <i class="cxi-filter-2 mr-1"></i>
+          Show filters
+        </button>
+      </div>
+
+      <div class="col-md-9">
+        <div class="d-flex align-items-center">
+          <div class="form-inline flex-nowrap mr-3 mr-xl-5">
+            <label for="sorting-top" class="font-weight-bold text-nowrap mr-2 pr-1 d-none d-lg-block">Sort by</label>
+            <select id="sorting-top" class="custom-select" name="sort_by" [(ngModel)]="sort_by" (change)="order_por()">
+              <option value="Defecto">Defecto</option>
+              <option value="Popularidad">Popularidad</option>
+              <option value="+-Precio">Mayor - menor precio</option>
+              <option value="-+Precio">Menor - mayor precio</option>
+              <option value="azTitulo">A - Z</option>
+              <option value="zaTitulo">Z - A</option>
+            </select>
+          </div>
+          <div class="form-inline flex-nowrap d-none d-sm-flex mr-3 mr-xl-5">
+            <label for="pager-top" class="font-weight-bold text-nowrap mr-2 pr-1 d-none d-lg-block">Show</label>
+            <select id="pager-top" class="custom-select" name="pageSize" [(ngModel)]="pageSize">
+              <option value="3">3</option>
+              <option value="20">20</option>
+              <option value="24">24</option>
+              <option value="48">48</option>
+
+            </select>
+            <span class="font-size-sm text-muted text-nowrap ml-2 d-none d-lg-block">products per page</span>
+          </div>
+          <ngb-pagination
+          [collectionSize]="productos.length"
+          [pageSize]="pageSize"
+          [(page)]="page"
+          [maxSize]="10"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          class="w-100 mx-4"
+        ></ngb-pagination>
+        </div>
+      </div>
+    </div>
+
+    <div class="row flex-lg-nowrap">
+
+
+      <!-- Filters (sidebar) -->
+      <div id="filtersSidebar" class="col-lg-3 pr-lg-4">
+        <div id="filtersOffcanvas" class="cs-offcanvas cs-offcanvas-collapse">
+          <div class="cs-offcanvas-cap align-items-center border-bottom mb-3">
+            <h2 class="h5 mb-0">Shop filters</h2>
+            <button class="close mr-n1" type="button" data-dismiss="offcanvas" aria-label="Close">
+              <span class="h2 font-weight-normal mt-n1 mb-0" aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="cs-offcanvas-body accordion-alt pb-4">
+
+              <!--Busqueda -->
+              <div class="card border-bottom">
+                <div class="card-header py-3" id="filter-panel">
+                  <h6 class="accordion-heading">
+                    <a href="#filter" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="filter">
+                      Buscar producto
+                      <span class="accordion-indicator"></span>
+                    </a>
+                  </h6>
+                </div>
+                <div class="collapse show" id="filter" aria-labelledby="filter-panel">
+                  <div class="cs-widget pl-1 pb-4 mt-n3">
+                    <div class="input-group-overlay  d-lg-block d-none order-lg-3 mt-3">
+                      <input class="form-control appended-form-control" id="buscador_shop" type="text" placeholder="Search for products..." name="filtro_producto" [(ngModel)]="filtro_producto">
+                      <div class="input-group-append-overlay"  style="cursor: pointer;" (click)="buscar_producto()">
+                        <span class="input-group-text"><i class="cxi-search lead align-middle"></i></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <!-- Category -->
+            <div class="card border-bottom">
+              <div class="card-header pt-0 pb-3" id="category-panel">
+                <h6 class="accordion-heading">
+                  <a href="#category" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="category">
+                    Categorias
+                    <span class="accordion-indicator"></span>
+                  </a>
+                </h6>
+              </div>
+              <div class="collapse show" id="category" aria-labelledby="category-panel">
+                <div class="cs-widget-data-list cs-filter">
+                  <div class="input-group-overlay mb-3">
+                    <input type="text" id="buscador_shop" class="cs-filter-search form-control form-control-sm appended-form-control" (keyup)="buscar_categorias()" placeholder="Search the clothes" name="filter_categoria" [(ngModel)]="filter_categoria">
+                    <div class="input-group-append-overlay">
+                      <span class="input-group-text">
+                        <i class="cxi-search font-size-sm"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <ul class="cs-filter-list list-unstyled pr-3" style="height: 12rem;" data-simplebar data-simplebar-auto-hide="false">
+                    <li class="cs-filter-item" >
+                      <div class="custom-control custom-checkbox">
+                        <input type="radio" name="group1" (change)="buscar_por_categoria()" class="custom-control-input" id="blazers-todos" value="todos" [(ngModel)]="filter_cat_productos">
+                        <label for="blazers-todos" class="custom-control-label">
+                          <span class="cs-filter-item-text">Todos</span>
+                          <span class="pl-1 text-muted">(235)</span>
+                        </label>
+                      </div>
+                    </li>
+                    <li class="cs-filter-item" *ngFor="let item of config_global.categorias;let indice = index">
+                      <div class="custom-control custom-checkbox">
+                        <input type="radio" name="group1" (change)="buscar_por_categoria()" class="custom-control-input" id="blazers-{{indice}}" value="{{item.titulo}}" [(ngModel)]="filter_cat_productos">
+                        <label for="blazers-{{indice}}" class="custom-control-label">
+                          <span class="cs-filter-item-text">{{item.titulo}}</span>
+                          <span class="pl-1 text-muted">(235)</span>
+                        </label>
+                      </div>
+                    </li>
+
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Price -->
+            <div class="card border-bottom">
+              <div class="card-header py-3" id="price-panel">
+                <h6 class="accordion-heading">
+                  <a href="#price" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="price">
+                    Precio
+                    <span class="accordion-indicator"></span>
+                  </a>
+                </h6>
+              </div>
+              <div class="collapse show" id="price" aria-labelledby="price-panel">
+                <div class="cs-widget pl-1 pr-3 pb-4 mt-n3">
+                  <div class="cs-range-slider"  data-start-min="250" data-start-max="680" data-min="0" data-max="1000" data-step="1">
+                    <div class="cs-range-slider-ui" id="slider"></div>
+                    <div class="d-flex align-items-center mt-3">
+                      <div class="w-50">
+                        <div class="form-group position-relative mb-0">
+                          <input type="number" class="form-control form-control-sm cs-range-slider-value-min">
+                        </div>
+                      </div>
+                      <div class="mx-1 px-2 font-size-xs">—</div>
+                      <div class="w-50">
+                        <div class="form-group position-relative mb-0">
+                          <input type="number" class="form-control form-control-sm cs-range-slider-value-max">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mt-3">
+                      <div class="col-12">
+                        <button class="btn btn-sm btn-block" style="background-color: #17696A; border: #17696A; padding: 11px; color: white;" (click)="buscar_precios()">Filtrar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Product grid -->
+      <div class="col">
+
+        <div class="row" *ngIf="load_data">
+          <div class="col-12 text-center">
+            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+              <span class="sr-only">Loading....</span>
+            </div>
+          </div>
+        </div>
+
+
+        <div *ngIf="!load_data" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3"  data-filters-columns>
+
+         <ng-container *ngIf="productos.length == 0">
+          <div class="col-lg-12 col-md-5">
+            <h3 class="h6 mb-2 text-uppercase">No se encontraron productos</h3>
+            <h2 class="h1 pb-lg-3">Es posible que sea un error</h2>
+
+            <a style="cursor: pointer;" (click)="reset_productos()" class="btn btn-gradient btn-hover-shadow">Mostrar todos los productos</a>
+        </div>
+         </ng-container>
+
+         <ng-container *ngIf="productos.length >= 1">
+           <!-- Item -->
+           <div class="col pb-sm-2 mb-grid-gutter" *ngFor="let item of productos| slice
+           : (page - 1) * pageSize
+           : (page - 1) * pageSize + pageSize;">
+            <div class="card card-product mx-auto" style="border: none !important;">
+              <div class="card-product-img">
+                <a [routerLink]="['/productos/',item.slug]" class="card-img-top">
+                  <img  [src]="url + 'obtener_portada/' + item.portada" alt="Product image">
+                </a>
+
+                <div class="card-product-widgets-top">
+                  <span class="badge product-badge badge-danger" style="padding: 10px; font-size: 15px;" *ngIf="descuento_activo && descuento_activo.categoria === item.categoria">-{{descuento_activo.descuento}}%</span>
+                  <div class="star-rating ml-auto">
+                    <i class="sr-star cxi-star-filled active"></i>
+                    <i class="sr-star cxi-star-filled active"></i>
+                    <i class="sr-star cxi-star-filled active"></i>
+                    <i class="sr-star cxi-star-filled active"></i>
+                    <i class="sr-star cxi-star-filled active"></i>
+                  </div>
+                </div>
+                <div class="card-product-widgets-bottom">
+                  <i class="cxi-heart" *ngIf="!item.isInWishlist" style="cursor: pointer; margin-left: 16rem;" (click)="agregar_wishlist(item)"></i>
+                  <i class="cxi-heart-filled ci-heart-filled" *ngIf="item.isInWishlist" style="cursor: pointer; margin-left: 16rem; color: #03CEA4;" (click)="eliminarWishlist(item)"></i>
+
+
+
+                </div>
+                <!-- <div class="card-product-widgets-bottom">
+                  <i class="cxi-heart-filled ci-heart-filled" style="cursor: pointer; margin-left: 15rem; color: #03CEA4;"></i>
+                  <a href="#" class="btn-wishlist ml-auto" data-toggle="tooltip" data-placement="left" title="Add to wishlist"></a>
+                </div> -->
+              </div>
+              <div class="card-body pb-2">
+                <h3 class="card-product-title text-truncate mb-2">
+                  <a [routerLink]="['/productos/',item.slug]" class="nav-link">{{item.titulo}}</a>
+                </h3>
+                <ng-container *ngIf="descuento_activo && descuento_activo.categoria != item.categoria">
+                  <div class="d-flex align-items-center" *ngIf="descuento_activo != undefined">
+                    <span class="h5 d-inline-block mb-0">$ {{item.precio}}</span>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="descuento_activo && descuento_activo.categoria === item.categoria">
+                  <div class="d-flex align-items-center" *ngIf="descuento_activo != undefined">
+                    <span class="h5 d-inline-block mb-0" style="color: #FF4242;">$ {{item.precio | descuento: descuento_activo.descuento}}</span>
+                    <del class="d-inline-block ml-2 pl-1 text-muted">$ {{item.precio}}</del>
+                  </div>
+                </ng-container>
+
+
+              </div>
+              <div class="card-footer">
+                <div class="d-flex align-items-center mb-2 pb-1">
+                  <div class="row">
+                    <div class="col-12">
+                      <a href="" style="color: #17696A;">{{item.categoria}}</a>
+                    </div>
+                  </div>
+
+                  <!-- <div class="mt-n2">
+                    <div class="custom-control cs-custom-size-option cs-custom-size-option-sm custom-control-inline">
+                      <input type="radio" class="custom-control-input" name="size-1" id="l-1">
+                      <label for="l-1" class="cs-custom-option-label">L</label>
+                    </div>
+                    <div class="custom-control cs-custom-size-option cs-custom-size-option-sm custom-control-inline">
+                      <input type="radio" class="custom-control-input" name="size-1" id="m-1" checked>
+                      <label for="m-1" class="cs-custom-option-label">M</label>
+                    </div>
+                    <div class="custom-control cs-custom-size-option cs-custom-size-option-sm custom-control-inline">
+                      <input type="radio" class="custom-control-input" name="size-1" id="s-1">
+                      <label for="s-1" class="cs-custom-option-label">S</label>
+                    </div>
+                  </div> -->
+
+                  <!-- <div class="ml-auto">
+                    <div class="custom-control cs-custom-color-option cs-custom-color-option-sm custom-control-inline">
+                      <input type="radio" class="custom-control-input" name="color-1" id="blue-1" value="Blue" checked>
+                      <label for="blue-1" class="cs-custom-option-label">
+                        <span class="cs-color-swatch" style="background-color: #6a9bf4;"></span>
+                      </label>
+                    </div>
+                    <div class="custom-control cs-custom-color-option cs-custom-color-option-sm custom-control-inline">
+                      <input type="radio" class="custom-control-input" name="color-1" id="orange-1" value="Orange">
+                      <label for="orange-1" class="cs-custom-option-label">
+                        <span class="cs-color-swatch" style="background-color: #ff9d50;"></span>
+                      </label>
+                    </div>
+                    <div class="custom-control cs-custom-color-option cs-custom-color-option-sm custom-control-inline">
+                      <input type="radio" class="custom-control-input" name="color-1" id="green-1" value="Green">
+                      <label for="green-1" class="cs-custom-option-label">
+                        <span class="cs-color-swatch" style="background-color: #16c995;"></span>
+                      </label>
+                    </div>
+                  </div> -->
+
+                </div>
+                <ng-container *ngIf="item.stock >= 1">
+                  <button type="button" class="btn btn-block" style="background-color: #17696A; border: #17696A; padding: 11px; color: white;" (click)="agregar_producto(item)">
+                    <i class="cxi-cart align-middle mt-n1 mr-2"></i>
+                    Add to cart
+                  </button>
+                </ng-container>
+                <ng-container *ngIf="item.stock == 0">
+                  <button type="button" class="btn btn-block" style="background: #D1D1D4; cursor:not-allowed;padding: 11px;">
+                    <i class="cxi-alert-octagon align-middle mt-n1 mr-2"></i>
+                    Agotado
+                  </button>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+         </ng-container>
+
+
+        </div>
+
+        <!-- Toolbar + Pagination -->
+        <div class="d-flex align-items-center pt-md-4">
+          <div class="form-inline flex-nowrap mr-3 mr-xl-5 pt-1">
+            <label for="sorting-bottom" class="font-weight-bold text-nowrap mr-2 pr-1 d-none d-md-block">Sort by</label>
+            <select id="sorting-bottom" class="custom-select" name="sort_by" [(ngModel)]="sort_by" (change)="order_por()">
+              <option value="Defecto">Defecto</option>
+              <option value="Popularidad">Popularidad</option>
+              <option value="+-Precio">Mayor - menor precio</option>
+              <option value="-+Precio">Menor - mayor precio</option>
+              <option value="azTitulo">A - Z</option>
+              <option value="zaTitulo">Z - A</option>
+            </select>
+          </div>
+          <div class="form-inline flex-nowrap d-none d-sm-flex mr-3 mr-xl-5 pt-1">
+            <label for="pager-bottom" class="font-weight-bold text-nowrap mr-2 pr-1 d-none d-md-block">Show</label>
+            <select id="pager-bottom" class="custom-select" name="pageSize" [(ngModel)]="pageSize">
+              <option value="3">3</option>
+              <option value="20">20</option>
+              <option value="24">24</option>
+              <option value="48">48</option>
+            </select>
+            <span class="font-size-sm text-muted text-nowrap ml-2 d-none d-md-block">products per page</span>
+          </div>
+          <ngb-pagination
+          [collectionSize]="productos.length"
+          [pageSize]="pageSize"
+          [(page)]="page"
+          [maxSize]="10"
+          [rotate]="true"
+          [boundaryLinks]="true"
+
+
+        ></ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+</main>
+
+
+<app-footer></app-footer>

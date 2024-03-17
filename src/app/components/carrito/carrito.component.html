@@ -1,0 +1,493 @@
+<app-nav></app-nav>
+
+
+<main class="cs-page-wrapper">
+
+
+      <!-- Promo bar -->
+      <section class="cs-promo-bar" style="background-color: #17696A; height: 30px;">
+        <div class="container d-flex justify-content-center">
+          <div class="cs-carousel cs-controls-inverse">
+            <div class="cs-carousel-inner" data-carousel-options = '{"mode": "gallery", "nav": false}'>
+              <div class="font-size-xs text-light px-2">
+                <strong class="mr-1">Up to 70% Off.</strong>
+                <a href="#" class="text-light">Shop our latest sale offers</a>
+              </div>
+              <div class="font-size-xs text-light px-2">
+                <strong class="mr-1">Money back guarantee.</strong>
+                <a href="#" class="text-light">Learn more</a>
+              </div>
+              <div class="font-size-xs text-light px-2">
+                <strong class="mr-1">Friendly customer support.</strong>
+                <a href="#" class="text-light">Contact 24/7</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+         <!-- Breadcrumb -->
+         <nav class="mb-3" style="background: #f3f3f3; padding: 8px;" aria-label="breadcrumb">
+          <div class="container">
+            <ol class="breadcrumb breadcrumb-alt mb-0">
+              <li class="breadcrumb-item">
+                <a href="index.html"><i class="cxi-home"></i></a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+            </ol>
+          </div>
+        </nav>
+
+
+        <!-- Page content -->
+        <section class="container pt-3 pt-md-4 pb-3 pb-sm-4 pb-lg-5 mb-4">
+          <div class="row">
+
+            <!-- Checkout content -->
+            <div class="col-lg-8 pr-lg-6">
+              <div class="d-flex align-items-center justify-content-between pb-2 mb-4">
+                <h1 class="mb-0">Checkout</h1>
+                <a href="shop-catalog.html" style="color: #1d8385;"><strong>Back to shopping</strong></a>
+              </div>
+
+              <!-- Alert -->
+              <!-- <div class="alert alert-info mb-4" role="alert">
+                <div class="media align-items-center">
+                  <i class="cxi-profile lead mr-3"></i>
+                  <div class="media-body">
+                    Already have an account?&nbsp;&nbsp;<a href="#modal-signin" class="alert-link" data-toggle="modal" data-view="#modal-signin-view">Sign in</a>&nbsp;&nbsp;for faster checkout experience.
+                  </div>
+                </div>
+              </div> -->
+
+              <hr class="border-top-0 border-bottom pt-2 mb-4">
+
+              <!-- Order review -->
+              <h2 class="h4 mb-4">1. Order Review</h2>
+
+              <div class="rounded mb-5" style="background: #F9F9F9;" *ngIf="carrito_arr.length >= 1">
+                <!-- Item -->
+                <div class="media px-2 px-sm-4 py-4 border-bottom" *ngFor="let item of carrito_arr">
+                  <a href="shop-single.html" style="min-width: 80px;">
+                    <img [src]="url + 'obtener_portada/' + item.producto.portada" width="80" alt="Product thumb">
+                  </a>
+                  <div class="media-body w-100 pl-3">
+                    <div class="d-sm-flex" >
+                      <div class="pr-sm-3 w-100" style="max-width: 16rem;">
+                        <h3 class="font-size-sm mb-3">
+                          <a href="shop-single.html" class="nav-link font-weight-bold">{{item.producto.titulo}}</a>
+                        </h3>
+                        <ul class="list-unstyled font-size-xs mt-n2 mb-2">
+                          <li class="mb-0"><span class="text-muted">{{item.producto.titulo_variedad}}:</span> {{item.variedad}}</li>
+
+                        </ul>
+                      </div>
+                      <div class="d-flex pr-sm-3">
+                        <input type="number" class="form-control form-control-sm bg-light mr-3" style="width: 4.5rem;" value="{{item.cantidad}}">
+                        <!-- <div class="text-nowrap pt-2">
+                          <strong >$ {{item.producto.precio}}</strong>
+                          <s class="font-size-xs text-muted">$31.00</s>
+                        </div> -->
+
+                        <ng-container *ngIf="descuento_activo && descuento_activo.categoria === item.producto.categoria">
+                          <div class="text-nowrap pt-2" *ngIf="descuento_activo != undefined">
+                            <strong class="text-danger" style="margin-right: 10px;">$ {{item.producto.precio * item.cantidad | descuento:descuento_activo.descuento}}</strong>
+                            <s class="font-size-xs text-muted" >${{item.producto.precio}}</s>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="descuento_activo && descuento_activo.categoria !== item.producto.categoria" >
+                          <div class="text-nowrap pt-2" *ngIf="descuento_activo != undefined">
+                            <strong>$ {{item.producto.precio * item.cantidad}}</strong>
+                          </div>
+                        </ng-container>
+
+
+
+
+                      </div>
+                      <div class="d-flex align-items-center flex-sm-column text-sm-center ml-sm-auto pt-3 pt-sm-0">
+                        <button class="btn btn-outline-primary btn-sm mr-2 mr-sm-0" id="carrito_delete" (click)="eliminar_item(item._id)">Delete</button>
+                        <button class="btn btn-link btn-sm text-decoration-none pt-sm-2 px-0 pb-0 mt-0 mt-sm-1" id="move_to_list">
+                          Move to
+                          <i class="cxi-heart ml-1"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="px-3 px-sm-4 py-4 text-right">
+                  <span class="text-muted">Subtotal:<strong class="text-dark font-size-lg ml-2">$ {{subtotal}}</strong></span>
+                </div>
+              </div>
+
+              <div class="rounded mb-5 p-3" style="background: #F9F9F9;" *ngIf="carrito_arr.length == 0">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <img src="assets/img/carrito-de-compras.png" style="width: 100%;" alt="">
+                  </div>
+                  <div class="col-lg-9" style="display: flex !important; align-items: center !important;">
+                    <dl style="font-size: 1.5rem !important;">
+                      <dt>Upps!</dt>
+                      <dd>Tu carrito esta vacio</dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+
+            <!-- Adresses -->
+            <h2 class="h4 mb-4">2. Direccion de envio</h2>
+            <div class="row pb-3">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+
+                    <div class="row" *ngIf="direccion_principal == undefined">
+                      <div class="col-sm-6 form-group">
+                        <label for="ac-fn">Nombres</label>
+                        <input
+                          type="text"
+                          id="ac-fn"
+                          class="form-control form-control-lg"
+                          name="destinatario"
+                          [(ngModel)]="direccion.destinatario"
+                          placeholder="Nombres completos del destinatario"
+                        />
+                      </div>
+                      <div class="col-sm-6 form-group">
+                        <label for="ac-fn">DNI</label>
+                        <input
+                          type="text"
+                          id="ac-fn"
+                          class="form-control form-control-lg"
+                          name="dni"
+                          [(ngModel)]="direccion.dni"
+                          placeholder="DNI"
+                        />
+                      </div>
+                      <div class="col-sm-6 form-group">
+                        <label for="ac-fn">ZIP</label>
+                        <input
+                          type="text"
+                          id="ac-fn"
+                          class="form-control form-control-lg"
+                          name="zip"
+                          [(ngModel)]="direccion.zip"
+                          placeholder="Codigo postal"
+                        />
+                      </div>
+                      <div class="col-sm-6 form-group">
+                        <label for="ac-fn">Telefono</label>
+                        <input
+                          type="text"
+                          id="ac-fn"
+                          class="form-control form-control-lg"
+                          name="telefono"
+                          [(ngModel)]="direccion.telefono"
+                          placeholder="Codigo postal"
+                        />
+                      </div>
+                      <div class="col-sm-12 form-group">
+                        <label for="ac-fn">Direccion</label>
+                        <textarea
+                          rows="3"
+                          class="form-control"
+                          placeholder="Direccion"
+                          name="direccion"
+                          [(ngModel)]="direccion.direccion"
+                        ></textarea>
+                      </div>
+
+                      <div class="col-sm-6 form-group">
+                        <label for="ac-fn">Pais</label>
+                        <select
+                          name="pais"
+                          class="custom-select custom-select-lg"
+                          [(ngModel)]="direccion.pais"
+                          (change)="select_pais()"
+                        >
+                          <option value="" selected disabled>Seleccionar</option>
+                          <option value="Argentina">Argentina</option>
+                          <option value="Bolivia">Bolivia</option>
+                          <option value="Brasil">Brasil</option>
+                          <option value="Chile">Chile</option>
+                          <option value="Colombia">Colombia</option>
+                          <option value="Costa Rica">Costa Rica</option>
+                          <option value="Cuba">Cuba</option>
+                          <option value="Ecuador">Ecuador</option>
+                          <option value="El Salvador">El Salvador</option>
+                          <option value="España">España</option>
+                          <option value="Estados Unidos">Estados Unidos</option>
+                          <option value="Guatemala">Guatemala</option>
+                          <option value="Haití">Haití</option>
+                          <option value="Honduras">Honduras</option>
+                          <option value="México">México</option>
+                          <option value="Nicaragua">Nicaragua</option>
+                          <option value="Panamá">Panamá</option>
+                          <option value="Paraguay">Paraguay</option>
+                          <option value="Perú">Perú</option>
+                          <option value="República Dominican">República Dominican</option>
+                          <option value="Uruguay">Uruguay</option>
+                          <option value="Venezuela">Venezuela</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-6 form-group">
+                        <label for="ac-fn">Region</label>
+                        <select
+                          id="sl-region"
+                          name="region"
+                          class="custom-select custom-select-lg"
+                          [(ngModel)]="direccion.region"
+                          (change)="select_region()"
+                          disabled
+                        >
+                          <option value="" selected disabled>Seleccionar</option>
+                          <option value="{{item.id}}" *ngFor="let item of regiones">{{item.name}}</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-6 form-group">
+                        <label for="ac-fn">Provincia</label>
+                        <select
+                          id="sl-provincia"
+                          name="provincia"
+                          class="custom-select custom-select-lg"
+                          [(ngModel)]="direccion.provincia"
+                          (change)="select_provincia()"
+                          disabled
+                        >
+                          <option value="" selected disabled>Seleccionar</option>
+                          <option value="{{item.id}}" *ngFor="let item of provincias">{{item.name}}</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-6 form-group">
+                        <label for="ac-fn">Distrito</label>
+                        <select
+                          id="sl-distrito"
+                          name="distrito"
+                          class="custom-select custom-select-lg"
+                          [(ngModel)]="direccion.distrito"
+                          disabled
+                        >
+                          <option value="" selected disabled>Seleccionar</option>
+                          <option value="{{item.id}}" *ngFor="let item of distritos">{{item.name}}</option>
+                        </select>
+                      </div>
+
+                      <div class="col-sm-12 form-group">
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="ex-check-1"
+                            name="principal"
+                            [(ngModel)]="direccion.principal"
+                          />
+                          <label class="form-check-label" for="ex-check-1"
+                            >Activar cuenta principal</label
+                          >
+                        </div>
+                      </div>
+
+                      <button type="submit" class="btn btn-primary btn-lg" (click)="registrar()">
+                        &nbsp;Crear Direccion&nbsp;
+                      </button>
+                    </div>
+
+
+                    <div class="row" *ngIf="direccion_principal">
+                      <div class="col-12">
+                        <dl>
+                          <dt>Destinatario</dt>
+                          <dd>{{direccion_principal.destinatario}}</dd>
+                          <dt>Direccion de envio</dt>
+                          <dd>{{direccion_principal.direccion}}</dd>
+                          <dd>{{direccion_principal.pais}}</dd>
+                          <span>{{direccion_principal.region}}</span> -
+                          <span>{{direccion_principal.provincia}}</span> -
+                          <span>{{direccion_principal.distrito}}</span>
+                          <dt>ZIP-Telefono</dt>
+                          <dd>{{direccion_principal.zip}} - {{direccion_principal.telefono}}</dd>
+                        </dl>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+              <hr class="mb-4 pb-2">
+
+              <!-- Shipping -->
+              <h2 class="h4 mb-4">3. Shipping Method</h2>
+              <div class="custom-control custom-radio mb-3" *ngFor="let item of envios">
+                <input type="radio" class="custom-control-input" id="courier" checked  name="precio_envio" [(ngModel)]="precio_envio" value="{{item.precio}}" (change)="calcular_total(item.titulo)">
+                <label for="courier" class="custom-control-label d-flex align-items-center">
+                  <span>
+                    <strong class="d-block">{{item.titulo}}</strong>
+                    <span class="text-muted font-size-sm">Fecha Estimada: {{item.tiempo}}</span>
+                  </span>
+                  <span class="ml-auto">${{item.precio}}</span>
+                </label>
+              </div>
+
+
+              <hr class="border-top-0 border-bottom pt-4 mb-4">
+
+              <!-- Payment -->
+              <h2 class="h4 pt-2 mb-4">4. Payment Method</h2>
+<!--
+              <ng-container *ngIf="direccion_principal"> -->
+                <div class="row pb-4">
+                  <div class="col-lg-7">
+                    <div class="accordion-alt" id="payment-methods">
+
+                      <!-- Card: Credit card -->
+                      <div class="card mb-3 px-4 py-3 border rounded box-shadow-sm">
+                        <div class="card-header py-2">
+                          <div class="accordion-heading custom-control custom-radio" data-toggle="collapse" data-target="#cc-card">
+                            <input type="radio" class="custom-control-input" id="cc" name="payment" checked>
+                            <label for="cc" class="custom-control-label d-flex align-items-center">
+                              <strong class="d-block mr-3">Credit card</strong>
+                              <img src="assets/img/visa.jpg" alt="Visa" width="50" style="margin-right: 10px;">
+                              <img src="assets/img/master-card.jpg" alt="Visa" width="50">
+                            </label>
+                          </div>
+                        </div>
+                        <div class="collapse show" id="cc-card" data-parent="#payment-methods">
+                          <div class="card-body pt-3 pb-0">
+                            <div class="form-group mb-3">
+                              <label for="cc-number">Card number</label>
+                              <input type="text" id="cc-number" class="form-control form-control-lg" data-format="card" placeholder="0000 0000 0000 0000">
+                            </div>
+                            <div class="d-flex">
+                              <div class="form-group mb-3 mr-3">
+                                <label for="cc-exp-date">Expiry date</label>
+                                <input type="text" id="cc-exp-date" class="form-control form-control-lg" data-format="date" placeholder="mm/yy">
+                              </div>
+                              <div class="form-group mb-3">
+                                <label for="cc-cvc">CVC</label>
+                                <input type="text" id="cc-cvc" class="form-control form-control-lg" data-format="cvc" placeholder="000">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Card: PayPal -->
+                      <div class="card mb-3 px-4 py-3 border rounded box-shadow-sm">
+                        <div class="card-header py-2">
+                          <div class="accordion-heading custom-control custom-radio" data-toggle="collapse" data-target="#paypal-card">
+                            <input type="radio" class="custom-control-input" id="paypal" name="payment">
+                            <label for="paypal" class="custom-control-label d-flex align-items-center">
+                              <strong class="d-block mr-3">PayPal</strong>
+                              <img src="assets/img/pay-pal.jpg" alt="Visa" width="48">
+                            </label>
+                          </div>
+                        </div>
+
+
+                          <div class="collapse" id="paypal-card" data-parent="#payment-methods" >
+                            <div class="card-body pt-3 pb-0" #paypalButton>
+                            </div>
+                          </div>
+
+
+
+                        </div>
+
+                      <!-- Card: Cash -->
+                      <div class="card mb-3 px-4 py-3 border rounded box-shadow-sm">
+                        <div class="card-header py-2">
+                          <div class="accordion-heading custom-control custom-radio" data-toggle="collapse" data-target="#cash-card">
+                            <input type="radio" class="custom-control-input" id="cash" name="payment">
+                            <label for="cash" class="custom-control-label">
+                              <strong class="d-block mr-3">Cash on delivery</strong>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="collapse" id="cash-card" data-parent="#payment-methods">
+                          <div class="card-body pt-3 pb-0">
+                            <p class="mb-2 text-muted">You have selected to pay with cash upon delivery.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <!-- </ng-container> -->
+
+              <!-- <ng-container *ngIf="!direccion_principal">
+                <h5>Error</h5>
+              </ng-container> -->
+
+
+
+
+              <hr class="mb-4 pb-2">
+
+              <!-- Additional info -->
+              <h2 class="h4 mb-4">5. Additional Information (optional)</h2>
+              <div class="form-group">
+                <label for="ch-notes">Order notes</label>
+                <textarea id="ch-notes" class="form-control form-control-lg" rows="5" placeholder="Notes about your order, e.g. special noted for delivery." name="nota" [(ngModel)]="venta.nota"></textarea>
+              </div>
+            </div>
+
+
+            <!-- Order totals (sticky sidebar) -->
+            <!-- For more sticky sidebar options visit https://abouolia.github.io/sticky-sidebar/#options -->
+            <aside class="col-lg-4">
+              <div class="sidebar-sticky">
+                <div class="sidebar-sticky-inner">
+                  <div class="form-group">
+                    <label for="promo-code">Aplicar cupon</label>
+                    <div class="input-group input-group-lg">
+                      <input type="text" id="promo-code" class="form-control" autocomplete="off"  placeholder="aplicar cupon" name="cupon" [(ngModel)]="venta.cupon">
+                      <div class="input-group-append">
+                        <button type="button" class="btn" style="background-color: #17696A; color: white; height: 50px;" (click)="validar_cupon()">&nbsp;&nbsp;Aplicar&nbsp;&nbsp;</button>
+                      </div>
+                    </div>
+                    <!-- Danger alert -->
+                    <div class="alert alert-danger mt-3" role="alert" *ngIf="erro_cupon">
+                      {{erro_cupon}}
+                    </div>
+                  </div>
+                  <div class="rounded mb-4" style="background: #F9F9F9;">
+                    <div class="border-bottom p-4">
+                      <h2 class="h4 mb-0">Order totals</h2>
+                    </div>
+                    <ul class="list-unstyled border-bottom mb-0 p-4">
+                      <li class="d-flex justify-content-between mb-2">
+                        <span class="font-weight-bold">Subtotal:</span>
+                        <span class="font-weight-bold">$ {{subtotal}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between mb-2">
+                        <span>Envio:</span>
+                        <span>${{precio_envio}}</span>
+                      </li>
+                      <li class="d-flex justify-content-between mb-2">
+                        <span>Descuento:</span>
+                        <span>${{descuento}}</span>
+                      </li>
+
+                    </ul>
+                    <div class="d-flex justify-content-between p-4">
+                      <span class="h5 mb-0">Order total:</span>
+                      <span class="h5 mb-0">$ {{total_pagar}}</span>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-lg btn-block" style="background-color: #17696A; border-radius: 0.25rem; border: #17696A; padding: 11px; color: white;">Complete order</button>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+</main>
+
+
+<app-footer></app-footer>

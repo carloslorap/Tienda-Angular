@@ -1,0 +1,29 @@
+#buscador_shop{
+  padding-left: 0.75rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0 0 rgba(78, 76, 76, 0);
+  transition: border-color .2s ease-in-out, background-color .2s ease-in-out, box-shadow .2s ease-in-out;
+
+}
+
+#buscador_shop:focus{
+  border: 1px solid #44a0a1;
+  -webkit-box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
+-moz-box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
+box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
+
+
+}
+#buscador_shop::placeholder{
+  font-size: 13px;
+
+}
+
+.align-middle{
+ font-size: 14px !important;
+}
+
+
+
+
+

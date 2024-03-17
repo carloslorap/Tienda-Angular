@@ -1,0 +1,50 @@
+#favotio_details_product{
+  height: 45px;
+  padding-inline: 25px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border: 1px solid #31a0a1;
+  color: #1b7b7c;
+  font-weight: 500;
+  transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out, box-shadow .2s ease-in-out;
+ }
+
+ #favotio_details_product:hover{
+   background: #17696A;
+   color: white;
+   border: 1px solid #17696A;
+ }
+
+
+ #input_show_product{
+
+  font-size: 17px;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0 0 rgba(78, 76, 76, 0);
+  transition: border-color .2s ease-in-out, background-color .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+
+#input_show_product:focus{
+  border: 1px solid #44a0a1;
+  -webkit-box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
+-moz-box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
+box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
+
+
+}
+
+#select-input{
+
+  font-size: 17px;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0 0 rgba(78, 76, 76, 0);
+  transition: border-color .2s ease-in-out, background-color .2s ease-in-out, box-shadow .2s ease-in-out;
+}
+#select-input:focus{
+  border: 1px solid #44a0a1;
+  -webkit-box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
+-moz-box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
+box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
+
+
+}

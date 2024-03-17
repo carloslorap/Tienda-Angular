@@ -1,0 +1,346 @@
+<app-nav></app-nav>
+
+<main class="cs-page-wrapper">
+
+  <!-- Promo bar -->
+  <section class="cs-promo-bar" style="background-color: #17696A; height: 30px;">
+    <div class="container d-flex justify-content-center">
+      <div class="cs-carousel cs-controls-inverse">
+        <div class="cs-carousel-inner" data-carousel-options = '{"mode": "gallery", "nav": false}'>
+          <div class="font-size-xs text-light px-2">
+            <strong class="mr-1">Up to 70% Off.</strong>
+            <a href="#" class="text-light">Shop our latest sale offers</a>
+          </div>
+          <div class="font-size-xs text-light px-2">
+            <strong class="mr-1">Money back guarantee.</strong>
+            <a href="#" class="text-light">Learn more</a>
+          </div>
+          <div class="font-size-xs text-light px-2">
+            <strong class="mr-1">Friendly customer support.</strong>
+            <a href="#" class="text-light">Contact 24/7</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Breadcrumb -->
+  <nav class="mb-3" style="background: #f3f3f3; padding: 8px;" aria-label="breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb breadcrumb-alt mb-0">
+        <li class="breadcrumb-item">
+          <a href="index.html"><i class="cxi-home"></i></a>
+        </li>
+
+        <li class="breadcrumb-item active" aria-current="page">Detalle de mi orden</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Page container -->
+  <section class="container pt-3 pt-lg-4 pb-5 pb-lg-6">
+    <div class="row pb-2 pb-lg-0">
+      <!-- Account menu (sticky sidebar) -->
+      <aside class="col-xl-3 col-lg-4 pb-3 mb-4 mb-lg-0">
+        <app-sidebar></app-sidebar>
+      </aside>
+
+      <!-- Content -->
+      <div class="col-lg-8 ml-auto" *ngIf="orden != undefined">
+        <div
+          class="d-flex align-items-center justify-content-between mb-4 pb-sm-2"
+        >
+          <h1 class="h2 mb-0">My orders</h1>
+        </div>
+
+        <div class="row">
+          <div class="col-12 mb-4">
+            <div class="card card-body py-3 box-shadow">
+              <div class="row">
+                <div class="col-lg-6">
+                  <table class="table mb-0">
+                    <tbody>
+                      <tr>
+                        <th class="border-0 py-2 pl-0">Order No:</th>
+                        <td class="border-0 py-2 px-0 text-muted">
+                          {{ id.toUpperCase() }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class="border-0 py-2 pl-0">Envio:</th>
+                        <td class="border-0 py-2 px-0 text-muted">
+                          {{ orden.envio_titulo }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class="border-0 py-2 pl-0">Fecha realizada:</th>
+                        <td class="border-0 py-2 px-0 text-muted">
+                          {{ orden.createdAt | date }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-lg-6">
+                  <table class="table mb-0">
+                    <tbody>
+                      <tr>
+                        <th class="border-0 py-2 pl-0">Venta:</th>
+                        <td class="border-0 py-2 px-0 text-muted">
+                          {{ orden.nventa }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class="border-0 py-2 pl-0">Transaccion:</th>
+                        <td class="border-0 py-2 px-0 text-muted">
+                          {{ orden.transaccion }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class="border-0 py-2 pl-0">Estado:</th>
+                        <td class="border-0 py-2 px-0 text-muted">
+                          {{ orden.estado }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 mb-3" *ngIf="orden.direccion">
+            <div class="card mb-2">
+              <div class="card-body">
+                <div class="row mb-0">
+                  <div class="col-md-3 col-sm-4 mb-sm-0">
+                    <h3 class="mb-2 fs-lg">
+                      {{ orden.direccion.destinatario }}
+                    </h3>
+                    <span class="d-block fs-sm text-muted"
+                      >Zip: {{ orden.direccion.zip }}</span
+                    >
+                    <!-- <a class="badge badge-primary" *ngIf="orden.direccion.principal">Direccion de Envio</a> -->
+                    <!-- <a class="badge badge-secondary" style="cursor: pointer;" *ngIf="!orden.direccion.principal" (click)="establecer_principal(orden.direccion._id)">Establecer principal</a> -->
+                  </div>
+                  <div class="col">
+                    <p class="mb-3">{{ orden.direccion.direccion }}</p>
+                    <p class="mb-3">
+                      {{ orden.direccion.pais }} -
+                      <span>{{ orden.direccion.region }}</span> -
+                      <span>{{ orden.direccion.provincia }}</span> -
+                      <span>{{ orden.direccion.distrito }}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card border-bottom" style="border: none;">
+          <div class="card-header accordion-heading py-1">
+            <a
+
+              class="d-flex flex-wrap justify-content-between py-3"
+              data-toggle="collapse"
+              aria-expanded="true"
+              style="color: #17696A; text-decoration: none;"
+            >
+              <span class="pr-2" ># {{ id.toUpperCase() }}</span>
+              <span class="font-size-sm text-muted text-nowrap px-2">
+                <i class="cxi-clock font-size-base align-middle mt-n1 mr-1"></i>
+                {{ orden.createdAt | date }}
+              </span>
+              <span class="badge badge-info">{{ orden.estado }}</span>
+              <span class="text-dark pl-1">${{ orden.subtotal }}</span>
+            </a>
+          </div>
+          <div id="order-1" class="collapse show" data-parent="#orders">
+            <div class="bg-secondary rounded mb-4">
+              <div class="table-responsive">
+                <table class="table mb-0">
+                  <tbody>
+                    <tr *ngFor="let item of d_ordenes">
+                      <td class="border-top-0">
+                        <div class="media pl-2 py-2">
+                          <a href="shop-single.html" style="min-width: 80px">
+                            <img
+                              [src]="
+                                url + 'obtener_portada/' + item.producto.portada
+                              "
+                              width="80"
+                              alt="Product thumb"
+                            />
+                          </a>
+                          <div class="media-body pl-3">
+                            <h3 class="font-size-sm mb-3">
+                              <a
+                                href="shop-single.html"
+                                class="nav-link font-weight-bold"
+                                >{{ item.producto.titulo }}</a
+                              >
+                            </h3>
+                            <ul class="list-unstyled font-size-xs mt-n2 mb-2">
+                              <li class="mb-0">
+                                <span class="text-muted"
+                                  >{{ item.producto.titulo_variedad }}:</span
+                                >
+                                {{ item.variedad }}
+                              </li>
+                            </ul>
+                            <a
+                              style="cursor: pointer;color: #1f9799;"
+                              data-toggle="modal"
+                              [attr.data-target]="'#review-' + item._id"
+                              class="font-size-sm"
+
+                              >[Emitir reseña]</a
+                            >
+
+                            <div
+                              class="modal fade"
+                              id="review-{{ item._id }}"
+                              tabindex="-1"
+                              style="display: none"
+                              aria-hidden="true"
+                            >
+                              <div
+                                class="modal-dialog modal-dialog-centered"
+                                role="document"
+                              >
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">Emitir reseña</h4>
+                                    <button
+                                      class="btn-close"
+                                      type="button"
+                                      data-dismiss="modal"
+                                      aria-label="Close"
+                                      style="background: none; border: none;"
+                                    >
+                                    <i class="cxi-cross"></i>
+                                  </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <p class="fs-sm">
+                                      Modal body text goes here.
+                                    </p>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button
+                                      class="btn btn-secondary btn-sm"
+                                      type="button"
+                                      data-dismiss="modal"
+                                    >
+                                      Close
+                                    </button>
+                                    <button
+                                      class="btn btn-primary btn-sm"
+                                      type="button"
+                                    >
+                                      Save changes
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="border-top-0">
+                        <div class="py-2">
+                          <div class="font-size-xs text-muted mb-1">Price:</div>
+                          <div class="font-size-sm text-dark">
+                            ${{ item.producto.precio }}
+                          </div>
+                        </div>
+                      </td>
+                      <td class="border-top-0">
+                        <div class="py-2">
+                          <div class="font-size-xs text-muted mb-1">
+                            Quantity:
+                          </div>
+                          <div class="font-size-sm text-dark">
+                            {{ item.cantidad }}
+                          </div>
+                        </div>
+                      </td>
+                      <td class="border-top-0">
+                        <div class="py-2 pr-3 text-right">
+                          <div class="font-size-xs text-muted mb-1">
+                            Subtotal:
+                          </div>
+                          <div class="font-size-sm font-weight-bold text-dark">
+                            ${{ item.subtotal }}
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <div class="py-2 pl-2">
+                          <span class="font-size-xs text-muted"></span>
+                          <span class="font-size-sm text-dark"></span>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="py-2">
+                          <span class="font-size-xs text-muted">Envio: </span>
+                          <span class="font-size-sm text-dark"
+                            >${{ orden.envio_precio }}</span
+                          >
+                        </div>
+                      </td>
+                      <td>
+                        <div class="py-2">
+                          <span class="font-size-xs text-muted"></span>
+                          <span class="font-size-sm text-dark"></span>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="py-2 pr-3 text-right">
+                          <span class="font-size-xs text-muted">Total: </span>
+                          <span class="font-size-sm font-weight-bold text-dark"
+                            >${{ orden.subtotal }}</span
+                          >
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end align-items-center mb-4">
+              <span class="font-weight-bold text-dark mr-3"
+                >Presione aqui para volver a la tienda</span
+              >
+              <a
+              id="regresar_tienda"
+                href="order-tracking.html"
+                class="btn btn-outline-primary btn-sm"
+                >Ir tienda</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8 ml-auto" *ngIf="orden == undefined">
+        <div class="row">
+          <div class="col-12">
+            <div class="col-lg-12 col-md-5">
+              <h3 class="h6 mb-2 text-uppercase">
+                No se encontraron productos
+              </h3>
+              <h2 class="h1 pb-lg-3">Es posible que sea un error</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<app-footer></app-footer>

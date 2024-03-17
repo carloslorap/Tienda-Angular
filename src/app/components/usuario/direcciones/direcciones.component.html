@@ -1,0 +1,261 @@
+<app-nav></app-nav>
+
+<main class="cs-page-wrapper">
+  <!-- Promo bar -->
+  <section class="cs-promo-bar" style="background-color: #17696A; height: 30px;">
+    <div class="container d-flex justify-content-center">
+      <div class="cs-carousel cs-controls-inverse">
+        <div class="cs-carousel-inner" data-carousel-options = '{"mode": "gallery", "nav": false}'>
+          <div class="font-size-xs text-light px-2">
+            <strong class="mr-1">Up to 70% Off.</strong>
+            <a href="#" class="text-light">Shop our latest sale offers</a>
+          </div>
+          <div class="font-size-xs text-light px-2">
+            <strong class="mr-1">Money back guarantee.</strong>
+            <a href="#" class="text-light">Learn more</a>
+          </div>
+          <div class="font-size-xs text-light px-2">
+            <strong class="mr-1">Friendly customer support.</strong>
+            <a href="#" class="text-light">Contact 24/7</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Breadcrumb -->
+  <nav class="mb-3" style="background: #f3f3f3; padding: 8px;" aria-label="breadcrumb">
+    <div class="container">
+      <ol class="breadcrumb breadcrumb-alt mb-0">
+        <li class="breadcrumb-item">
+          <a href="index.html"><i class="cxi-home"></i></a>
+        </li>
+
+        <li class="breadcrumb-item active" aria-current="page">Mi direccion</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Page container -->
+  <section class="container pt-3 pt-lg-4 pb-5 pb-lg-6">
+    <div class="row pb-2 pb-lg-0">
+      <!-- Account menu (sticky sidebar) -->
+      <aside class="col-xl-3 col-lg-4 pb-3 mb-4 mb-lg-0">
+        <app-sidebar></app-sidebar>
+      </aside>
+
+      <!-- Content -->
+      <div class="col-lg-8 ml-auto">
+        <div class="d-flex align-items-center justify-content-between mb-4 pb-1 pb-sm-3">
+          <h1 class="h2 mb-0">Nueva Direccion</h1>
+        </div>
+
+        <form class="mb-5">
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <label for="ac-fn">Nombres</label>
+              <input
+                type="text"
+                id="ac-fn"
+                class="form-control form-control-lg"
+                name="destinatario"
+                [(ngModel)]="direccion.destinatario"
+                placeholder="Nombres completos del destinatario"
+              />
+            </div>
+            <div class="col-sm-6 form-group">
+              <label for="ac-fn">DNI</label>
+              <input
+                type="text"
+                id="ac-fn"
+                class="form-control form-control-lg"
+                name="dni"
+                [(ngModel)]="direccion.dni"
+                placeholder="DNI"
+              />
+            </div>
+            <div class="col-sm-6 form-group">
+              <label for="ac-fn">ZIP</label>
+              <input
+                type="text"
+                id="ac-fn"
+                class="form-control form-control-lg"
+                name="zip"
+                [(ngModel)]="direccion.zip"
+                placeholder="Codigo postal"
+              />
+            </div>
+            <div class="col-sm-6 form-group">
+              <label for="ac-fn">Telefono</label>
+              <input
+                type="text"
+                id="ac-fn"
+                class="form-control form-control-lg"
+                name="telefono"
+                [(ngModel)]="direccion.telefono"
+                placeholder="Codigo postal"
+              />
+            </div>
+            <div class="col-sm-12 form-group">
+              <label for="ac-fn">Direccion</label>
+              <textarea
+                rows="3"
+                id="ac-fnl"
+                class="form-control"
+                placeholder="Direccion"
+                name="direccion"
+                [(ngModel)]="direccion.direccion"
+              ></textarea>
+            </div>
+
+            <div class="col-sm-6 form-group">
+              <label for="ac-fn">Pais</label>
+              <select
+                name="pais"
+                class="custom-select custom-select-lg"
+                [(ngModel)]="direccion.pais"
+                (change)="select_pais()"
+              >
+                <option value="" selected disabled>Seleccionar</option>
+                <option value="Argentina">Argentina</option>
+                <option value="Bolivia">Bolivia</option>
+                <option value="Brasil">Brasil</option>
+                <option value="Chile">Chile</option>
+                <option value="Colombia">Colombia</option>
+                <option value="Costa Rica">Costa Rica</option>
+                <option value="Cuba">Cuba</option>
+                <option value="Ecuador">Ecuador</option>
+                <option value="El Salvador">El Salvador</option>
+                <option value="España">España</option>
+                <option value="Estados Unidos">Estados Unidos</option>
+                <option value="Guatemala">Guatemala</option>
+                <option value="Haití">Haití</option>
+                <option value="Honduras">Honduras</option>
+                <option value="México">México</option>
+                <option value="Nicaragua">Nicaragua</option>
+                <option value="Panamá">Panamá</option>
+                <option value="Paraguay">Paraguay</option>
+                <option value="Perú">Perú</option>
+                <option value="República Dominican">República Dominican</option>
+                <option value="Uruguay">Uruguay</option>
+                <option value="Venezuela">Venezuela</option>
+              </select>
+            </div>
+            <div class="col-sm-6 form-group">
+              <label for="ac-fn">Region</label>
+              <select
+                id="sl-region"
+                name="region"
+                class="custom-select custom-select-lg"
+                [(ngModel)]="direccion.region"
+                (change)="select_region()"
+                disabled
+              >
+                <option value="" selected disabled>Seleccionar</option>
+                <option value="{{item.id}}" *ngFor="let item of regiones">{{item.name}}</option>
+              </select>
+            </div>
+            <div class="col-sm-6 form-group">
+              <label for="ac-fn">Provincia</label>
+              <select
+                id="sl-provincia"
+                name="provincia"
+                class="custom-select custom-select-lg"
+                [(ngModel)]="direccion.provincia"
+                (change)="select_provincia()"
+                disabled
+              >
+                <option value="" selected disabled>Seleccionar</option>
+                <option value="{{item.id}}" *ngFor="let item of provincias">{{item.name}}</option>
+              </select>
+            </div>
+            <div class="col-sm-6 form-group">
+              <label for="ac-fn">Distrito</label>
+              <select
+                id="sl-distrito"
+                name="distrito"
+                class="custom-select custom-select-lg"
+                [(ngModel)]="direccion.distrito"
+                disabled
+              >
+                <option value="" selected disabled>Seleccionar</option>
+                <option value="{{item.id}}" *ngFor="let item of distritos">{{item.name}}</option>
+              </select>
+            </div>
+
+            <div class="col-sm-12 form-group">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="ex-check-1"
+                  name="principal"
+                  [(ngModel)]="direccion.principal"
+                />
+                <label class="form-check-label" for="ex-check-1"
+                  >Activar cuenta principal</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-lg" style="background-color: #17696A;padding-inline: 25px !important; border-radius: 0.25rem;font-size: 15px; font-weight: bold; border: #17696A; padding: 11px; color: white;" (click)="registrar()">
+            &nbsp;Crear Direccion&nbsp;
+          </button>
+        </form>
+
+        <div class="d-flex align-items-center justify-content-between mb-4 pb-1 pb-sm-3">
+          <h1 class="h2 mb-0">Mis Direcciones</h1>
+        </div>
+
+
+        <div class="row" *ngIf="!load_data">
+          <div class="col-12" *ngIf="direcciones.length >= 1">
+            <ng-container *ngFor="let item of direcciones">
+
+              <div class="card mb-2" >
+                <div class="card-body ">
+                  <div class="row mb-0" >
+                    <div class="col-md-3 col-sm-4 mb-sm-0 mb-3">
+                      <h3 class="mb-2 fs-lg">{{item.destinatario}}</h3>
+                      <span class="d-block mb-3 fs-sm text-muted">Zip: {{item.zip}}</span>
+                      <a class="badge badge-primary" *ngIf="item.principal">Direccion de Envio</a>
+                      <a class="badge badge-secondary" style="cursor: pointer;" *ngIf="!item.principal" (click)="establecer_principal(item._id)">Establecer principal</a>
+                    </div>
+                    <div class="col">
+                      <p class="mb-3">{{item.direccion}}</p>
+                      <p class="mb-3">{{item.pais}} -
+                      <span>{{item.region}}</span> -
+                      <span>{{item.provincia}}</span> -
+                      <span>{{item.distrito}}</span>
+                    </p>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+
+          </div>
+
+          <div class="col-12" *ngIf="direcciones.length == 0">
+
+              <h3 class="h6 mb-2 text-uppercase">No se encontraron direcciones</h3>
+              <h5 class="h3 pb-lg-3">Debe registrar su direccion de envio.</h5>
+
+          </div>
+
+        </div>
+
+        <div class="row" *ngIf="load_data">
+          <div class="col-12 text-center">
+            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+              <span class="sr-only">Loading....</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<app-footer></app-footer>

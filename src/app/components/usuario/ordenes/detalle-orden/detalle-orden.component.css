@@ -1,0 +1,15 @@
+#regresar_tienda{
+  padding-inline: 25px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border: 1px solid #31a0a1;
+  color: #1b7b7c;
+  font-weight: 500;
+  transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out, box-shadow .2s ease-in-out;
+ }
+
+ #regresar_tienda:hover{
+   background: #17696A;
+   color: white;
+   border: 1px solid #17696A;
+ }
