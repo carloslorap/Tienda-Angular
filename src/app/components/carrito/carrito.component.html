@@ -90,17 +90,16 @@
                           <s class="font-size-xs text-muted">$31.00</s>
                         </div> -->
 
-                        <ng-container *ngIf="descuento_activo && descuento_activo.categoria === item.producto.categoria">
-                          <div class="text-nowrap pt-2" *ngIf="descuento_activo != undefined">
+
+                          <div class="text-nowrap pt-2" *ngIf="descuento_activo !== undefined && descuento_activo.categoria === item.producto.categoria">
                             <strong class="text-danger" style="margin-right: 10px;">$ {{item.producto.precio * item.cantidad | descuento:descuento_activo.descuento}}</strong>
                             <s class="font-size-xs text-muted" >${{item.producto.precio}}</s>
                           </div>
-                        </ng-container>
-                        <ng-container *ngIf="descuento_activo && descuento_activo.categoria !== item.producto.categoria" >
-                          <div class="text-nowrap pt-2" *ngIf="descuento_activo != undefined">
+
+
+                          <div class="text-nowrap pt-2" *ngIf="descuento_activo === undefined || descuento_activo.categoria != item.producto.categoria">
                             <strong>$ {{item.producto.precio * item.cantidad}}</strong>
                           </div>
-                        </ng-container>
 
 
 
@@ -289,7 +288,7 @@
                         </div>
                       </div>
 
-                      <button type="submit" class="btn btn-primary btn-lg" (click)="registrar()">
+                      <button type="submit" class="btn btn-lg" style="background-color: #17696A;border-radius: 0.25rem; border: #17696A; padding: 10px; color: white;" (click)="registrar()">
                         &nbsp;Crear Direccion&nbsp;
                       </button>
                     </div>

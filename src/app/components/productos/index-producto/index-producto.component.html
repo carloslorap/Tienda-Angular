@@ -273,7 +273,7 @@
                 </div>
                 <div class="card-product-widgets-bottom">
                   <i class="cxi-heart" *ngIf="!item.isInWishlist" style="cursor: pointer; margin-left: 16rem;" (click)="agregar_wishlist(item)"></i>
-                  <i class="cxi-heart-filled ci-heart-filled" *ngIf="item.isInWishlist" style="cursor: pointer; margin-left: 16rem; color: #03CEA4;" (click)="eliminarWishlist(item)"></i>
+                  <i class="cxi-heart-filled" *ngIf="item.isInWishlist" style="cursor: pointer; margin-left: 16rem; color: #03CEA4;" (click)="eliminarWishlist(item)"></i>
 
 
 
@@ -287,17 +287,19 @@
                 <h3 class="card-product-title text-truncate mb-2">
                   <a [routerLink]="['/productos/',item.slug]" class="nav-link">{{item.titulo}}</a>
                 </h3>
-                <ng-container *ngIf="descuento_activo && descuento_activo.categoria != item.categoria">
-                  <div class="d-flex align-items-center" *ngIf="descuento_activo != undefined">
-                    <span class="h5 d-inline-block mb-0">$ {{item.precio}}</span>
-                  </div>
-                </ng-container>
-                <ng-container *ngIf="descuento_activo && descuento_activo.categoria === item.categoria">
-                  <div class="d-flex align-items-center" *ngIf="descuento_activo != undefined">
-                    <span class="h5 d-inline-block mb-0" style="color: #FF4242;">$ {{item.precio | descuento: descuento_activo.descuento}}</span>
-                    <del class="d-inline-block ml-2 pl-1 text-muted">$ {{item.precio}}</del>
-                  </div>
-                </ng-container>
+
+                <!-- Mostrar precio original si no hay descuento activo -->
+              <div class="d-flex align-items-center" *ngIf="descuento_activo === undefined || descuento_activo.categoria != item.categoria">
+                <span class="h5 d-inline-block mb-0">$ {{item.precio}}</span>
+              </div>
+
+              <!-- Mostrar precio con descuento si hay descuento activo -->
+              <div class="d-flex align-items-center" *ngIf="descuento_activo !== undefined && descuento_activo.categoria === item.categoria">
+                <span class="h5 d-inline-block mb-0" style="color: #FF4242;">$ {{item.precio | descuento: descuento_activo.descuento}}</span>
+                <del class="d-inline-block ml-2 pl-1 text-muted">$ {{item.precio}}</del>
+              </div>
+
+
 
 
               </div>

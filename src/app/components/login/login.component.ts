@@ -13,6 +13,8 @@ export class LoginComponent implements OnInit {
   public user :any ={}
   public usuario :any ={}
   public token:any
+  public usuario_register :any ={}
+
 
   constructor(private _router:Router,private _clienteService:ClienteService){
     this.token = localStorage.getItem('token');
@@ -71,6 +73,52 @@ export class LoginComponent implements OnInit {
 
         this._router.navigate(['/'])
        }
+      })
+
+    }
+  }
+
+
+  register(){
+    if (!this.usuario_register.email) {
+      iziToast.show({
+        title:'ERROR',
+        titleColor: '#FF0000',
+        class:'text-danger',
+        position:'topRight',
+        message:'Ingrese el email'
+       })
+    }else if(!this.usuario_register.password){
+      iziToast.show({
+        title:'ERROR',
+        titleColor: '#FF0000',
+        class:'text-danger',
+        position:'topRight',
+        message:'Ingrese la contraseña'
+       })
+    }else if(!this.usuario_register.nombres){
+      iziToast.show({
+        title:'ERROR',
+        titleColor: '#FF0000',
+        class:'text-danger',
+        position:'topRight',
+        message:'Ingrese el nombre'
+       })
+    }else if(!this.usuario_register.apellidos){
+      iziToast.show({
+        title:'ERROR',
+        titleColor: '#FF0000',
+        class:'text-danger',
+        position:'topRight',
+        message:'Ingrese el apellido'
+       })
+    }else{
+
+      this._clienteService.registro_cliente(this.usuario_register).subscribe(response=>{
+        this.usuario= response.data
+        localStorage.setItem('token',response.token)
+        localStorage.setItem('_id',response.data._id)
+        this._router.navigate(['/'])
       })
 
     }

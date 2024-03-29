@@ -41,6 +41,12 @@ export class ClienteService {
 
     return true;
   }
+  registro_cliente(data: any): Observable<any> {
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.post(this.url + 'registro_cliente', data, {
+      headers: headers,
+    });
+  }
 
   login_cliente(data: any): Observable<any> {
     let headers = new HttpHeaders().set('Content-Type','application/json');

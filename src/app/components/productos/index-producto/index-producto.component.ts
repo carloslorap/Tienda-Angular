@@ -103,8 +103,13 @@ export class IndexProductoComponent implements OnInit {
       if (response.data != undefined) {
         this.descuento_activo = response.data[0]
         console.log(this.descuento_activo);
+
+
       }else{
-        this.descuento_activo = undefined
+        this.descuento_activo = undefined;
+
+        console.log(this.descuento_activo);
+
       }
 
 

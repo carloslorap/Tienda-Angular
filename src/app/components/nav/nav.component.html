@@ -358,7 +358,7 @@
             <div class="d-flex align-items-center">
               <input type="number" class="form-control form-control-sm bg-light mr-3" id="nav_cantidad" readonly style="width: 4.5rem; background: #ffffff !important;" value="{{item.cantidad}}">
 
-              <div class="text-nowrap" *ngIf="descuento_activo != undefined && descuento_activo.categoria !== item.producto.categoria">
+              <div class="text-nowrap" *ngIf="descuento_activo === undefined || descuento_activo.categoria != item.producto.categoria">
                 <strong>$ {{item.producto.precio * item.cantidad}}</strong>
               </div>
 

@@ -233,23 +233,32 @@ export class NavComponent implements OnInit {
 
   calcular_carrito() {
     this.subtotal = 0;
+    let hayDescuentoActivo = false;
 
-    if (this.descuento_activo) {
-      this.carrito_arr.forEach(element => {
-        let precioProducto = (parseInt(element.producto.precio) * parseInt(element.cantidad));
+    this.carrito_arr.forEach(element => {
+      let precioProducto = parseInt(element.producto.precio) * parseInt(element.cantidad);
 
-        if (this.descuento_activo && this.descuento_activo.categoria === element.producto.categoria) {
-          // Aplicar descuento solo a los productos de la categoría correspondiente
-          let descuento = (precioProducto * this.descuento_activo.descuento) / 100;
-          this.subtotal +=  descuento;
-        } else {
-          // Dejar el precio original para los productos que no coinciden con la categoría o no hay descuento activo
-          this.subtotal += precioProducto;
-        }
-      });
+      if (this.descuento_activo && this.descuento_activo.categoria === element.producto.categoria) {
+        // Aplicar descuento solo a los productos de la categoría correspondiente
+        let descuento = (precioProducto * this.descuento_activo.descuento) / 100;
+        this.subtotal += precioProducto - descuento;
+        hayDescuentoActivo = true;
+      } else {
+        // Dejar el precio original para los productos que no coinciden con la categoría o no hay descuento activo
+        this.subtotal += precioProducto;
+      }
+    });
+
+    // Si no hay descuento activo, simplemente sumar los precios originales
+    if (!hayDescuentoActivo) {
+      this.subtotal = this.carrito_arr.reduce((total, element) => {
+        return total + parseInt(element.producto.precio) * parseInt(element.cantidad);
+      }, 0);
     }
 
+
   }
+
 
       eliminar_item(id:any){
         this._clienteService.eliminar_carrito_cliente(id,this.token).subscribe(response=>{

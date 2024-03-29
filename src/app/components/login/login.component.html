@@ -2,16 +2,27 @@
 
 
 <main  class="cs-page-wrapper">
-  <nav class="bg-secondary mb-3" aria-label="breadcrumb">
-      <div class="container">
-        <ol class="breadcrumb breadcrumb-alt mb-0">
-          <li class="breadcrumb-item">
-            <a href="index.html"><i class="cxi-home"></i></a>
-          </li>
-          <li class="breadcrumb-item active" aria-current="page">Checkout</li>
-        </ol>
+    <!-- Promo bar -->
+    <section class="cs-promo-bar" style="background-color: #17696A; height: 30px;">
+      <div class="container d-flex justify-content-center">
+        <div class="cs-carousel cs-controls-inverse">
+          <div class="cs-carousel-inner" data-carousel-options = '{"mode": "gallery", "nav": false}'>
+            <div class="font-size-xs text-light px-2">
+              <strong class="mr-1">Up to 70% Off.</strong>
+              <a href="#" class="text-light">Shop our latest sale offers</a>
+            </div>
+            <div class="font-size-xs text-light px-2">
+              <strong class="mr-1">Money back guarantee.</strong>
+              <a href="#" class="text-light">Learn more</a>
+            </div>
+            <div class="font-size-xs text-light px-2">
+              <strong class="mr-1">Friendly customer support.</strong>
+              <a href="#" class="text-light">Contact 24/7</a>
+            </div>
+          </div>
+        </div>
       </div>
-    </nav>
+    </section>
 
   <section class="container pt-3 pt-md-4 pb-3 pb-sm-4 pb-lg-5 mb-4">
       <div class="row">
@@ -22,12 +33,12 @@
                   <form>
                     <div class="form-group">
                       <label for="signin-email">Email</label>
-                      <input type="email" class="form-control" placeholder="Your email address" required="" name="email" [(ngModel)]="user.email">
+                      <input type="email" class="form-control" id="login-input" placeholder="Your email address" required="" name="email" [(ngModel)]="user.email">
                     </div>
                     <div class="form-group">
                       <label for="signin-password" class="form-label">Password</label>
                       <div class="cs-password-toggle input-group-overlay">
-                        <input type="password" class="form-control appended-form-control" id="signin-password" placeholder="Your password" required="" name="password" [(ngModel)]="user.password">
+                        <input type="password" class="form-control appended-form-control" id="login-input" placeholder="Your password" required="" name="password" [(ngModel)]="user.password">
                         <div class="input-group-append-overlay">
                           <label class="btn cs-password-toggle-btn input-group-text">
                             <input type="checkbox" class="custom-control-input">
@@ -40,7 +51,7 @@
                     <div class="d-flex justify-content-between align-items-center form-group">
                       <a href="#" class="font-size-sm text-decoration-none">Olvido su contraseña?</a>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block" (click)="login()">Iniciar sesión</button>
+                    <button type="submit" class="btn btn-lg btn-block" style="background-color: #17696A;border-radius: 0.25rem; border: #17696A; padding: 9px; color: white;" (click)="login()">Iniciar sesión</button>
                     <p class="font-size-sm pt-4 mb-0">
                       No tienes una cuenta?
                       <a href="#" class="font-weight-bold text-decoration-none">Registrate</a>
@@ -57,22 +68,22 @@
                           <div class="row">
                               <div class="col-lg-6">
                                   <label for="signin-email">Nombres completos</label>
-                                  <input type="email" class="form-control"  placeholder="Names" required="">
+                                  <input type="email" class="form-control" id="login-input"  placeholder="Names" name="nombres" [(ngModel)]="usuario_register.nombres">
                               </div>
                               <div class="col-lg-6">
                                   <label for="signin-email">Apellidos completos</label>
-                                  <input type="email" class="form-control"  placeholder="Fullname" required="">
+                                  <input type="email" class="form-control" id="login-input"  placeholder="Fullname" required="" name="apellidos" [(ngModel)]="usuario_register.apellidos">
                               </div>
                           </div>
                       </div>
                       <div class="form-group">
                           <label for="signin-email">Email</label>
-                          <input type="email" class="form-control" placeholder="Your email address" required="">
+                          <input type="email" class="form-control" id="login-input" placeholder="Your email address" name="email" [(ngModel)]="usuario_register.email">
                       </div>
                       <div class="form-group">
                           <label for="signin-password" class="form-label">Password</label>
                           <div class="cs-password-toggle input-group-overlay">
-                          <input type="password" class="form-control appended-form-control" id="signin-password" placeholder="Your password" required="">
+                          <input type="password" class="form-control appended-form-control" id="login-input" placeholder="Your password" name="password" [(ngModel)]="usuario_register.password">
                           <div class="input-group-append-overlay">
                               <label class="btn cs-password-toggle-btn input-group-text">
                               <input type="checkbox" class="custom-control-input">
@@ -89,11 +100,8 @@
                           </div>
                           <a href="#" class="font-size-sm text-decoration-none">Forgot password?</a>
                       </div>
-                      <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                      <p class="font-size-sm pt-4 mb-0">
-                          Ya tienes una cuenta?
-                          <a href="#" class="font-weight-bold text-decoration-none">Registrarme</a>
-                      </p>
+                      <button type="submit" class="btn btn-lg btn-block" (click)="register()"  style="background-color: #17696A;border-radius: 0.25rem; border: #17696A; padding: 8px; color: white;">Registrarme</button>
+
                   </form>
                 </div>
           </div>
