@@ -26,7 +26,7 @@ export class ShowProductoComponent implements OnInit {
   }
   public btn_cart = false
   public descuento_activo :any = undefined
-  public socket = io('http://localhost:4000')
+  public socket = io('https://servereccomersangular.onrender.com');
 
   constructor(private _route :ActivatedRoute,private _guestService:GuestService,private _clienteService : ClienteService){
     this.url = GLOBAL.url;

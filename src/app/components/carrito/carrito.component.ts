@@ -30,7 +30,8 @@ export class CarritoComponent implements OnInit {
   public carrito_arr: Array<any> = [];
   public url: any;
   public total_pagar: any = 0;
-  public socket = io('http://localhost:4000');
+  public socket = io('https://servereccomersangular.onrender.com');
+  // public socket = io('http://localhost:4000');
 
   public direccion_principal: any = {};
   public direccion: any = {

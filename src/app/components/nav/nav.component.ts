@@ -33,7 +33,7 @@ export class NavComponent implements OnInit {
   public config_global: any = {};
   public op_cart = false;
   public subtotal = 0
-  public socket = io('http://localhost:4000')
+  public socket = io('https://servereccomersangular.onrender.com');
   public descuento_activo :any = undefined
   public wishlist_arr :Array<any> = [];
   public productos: Array<any> = [];

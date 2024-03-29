@@ -34,7 +34,7 @@ export class IndexProductoComponent implements OnInit {
   }
   public user_lc: any = {};
   public wishlist_data : any ={}
-  public socket = io('http://localhost:4000')
+  public socket = io('https://servereccomersangular.onrender.com');
   public btn_cart = false
   public descuento_activo :any = undefined
   public load_data = true;
