@@ -145,7 +145,7 @@ export class InicioComponent implements OnInit {
           1200: { items: 3 },
         },
       });
-    }, 500);
+    }, 600);
 
     this._guestService.obtener_descuento_activo().subscribe(response=>{
 
