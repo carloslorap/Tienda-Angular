@@ -39,6 +39,8 @@ export class ShowProductoComponent implements OnInit {
 
           this._guestService.listar_productos_recomendados_publico(this.producto.categoria).subscribe(response=>{
             this.producto_rec = response.data
+            console.log(this.producto_rec);
+
           })
         })
 
@@ -47,6 +49,9 @@ export class ShowProductoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
+
 
     setTimeout(()=>{
       tns({
@@ -100,20 +105,16 @@ export class ShowProductoComponent implements OnInit {
         }
       }
     });
+
     },500)
 
 
-    this._guestService.obtener_descuento_activo().subscribe(response=>{
 
-      if (response.data != undefined) {
-        this.descuento_activo = response.data[0]
-        console.log(this.descuento_activo);
-      }else{
-        this.descuento_activo = undefined
-      }
+    this._guestService.obtener_descuento_activo().subscribe(response => {
+      this.descuento_activo = response.data !== undefined ? response.data[0] : undefined;
+      console.log(this.descuento_activo);
+    });
 
-
-    })
   }
 
   agregar_producto(){

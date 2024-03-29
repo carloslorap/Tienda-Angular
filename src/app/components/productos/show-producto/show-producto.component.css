@@ -48,3 +48,8 @@ box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
 
 
 }
+
+.cs-carousel-inner-two{
+  display: flex;
+  gap: 20px;
+}
