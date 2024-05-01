@@ -272,8 +272,8 @@
                   </div>
                 </div>
                 <div class="card-product-widgets-bottom">
-                  <i class="cxi-heart" *ngIf="!item.isInWishlist" style="cursor: pointer; margin-left: 16rem;" (click)="agregar_wishlist(item)"></i>
-                  <i class="cxi-heart-filled" *ngIf="item.isInWishlist" style="cursor: pointer; margin-left: 16rem; color: #03CEA4;" (click)="eliminarWishlist(item)"></i>
+                  <i class="cxi-heart" *ngIf="!isWishlist(item._id)" style="cursor: pointer; margin-left: 16rem;" (click)="agregar_wishlist(item)"></i>
+                  <i class="cxi-heart-filled" *ngIf="isWishlist(item._id)" style="cursor: pointer; margin-left: 16rem; color: #03CEA4;" (click)="eliminarWishlist(item)"></i>
 
 
 

@@ -1,48 +1,47 @@
-#buscador_nav{
+#buscador_nav {
   padding-left: 0.75rem;
   border-radius: 0.25rem;
-  background: #F8F9FA;
+  background: #f8f9fa;
   box-shadow: 0 0 0 0 rgba(78, 76, 76, 0);
-  transition: border-color .2s ease-in-out, background-color .2s ease-in-out, box-shadow .2s ease-in-out;
-
+  transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
 }
-#buscador_nav:focus{
+#buscador_nav:focus {
   border: 1px solid #44a0a1;
-  -webkit-box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
--moz-box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
-box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
-
-
+  -webkit-box-shadow: 5px 18px 12px -10px rgba(237, 232, 237, 1);
+  -moz-box-shadow: 5px 18px 12px -10px rgba(237, 232, 237, 1);
+  box-shadow: 5px 18px 12px -10px rgba(237, 232, 237, 1);
 }
 
-#buscador_nav::placeholder{
+#buscador_nav::placeholder {
   font-size: 13px;
-  color: #9A9CA5;
+  color: #9a9ca5;
 }
 
-.dropdown-item.active, .dropdown-item:active {
+.dropdown-item.active,
+.dropdown-item:active {
   color: #44a0a1 !important;
   text-decoration: none;
   background-color: #44a0a1 !important;
 }
 
-#nav_cantidad:focus{
+#nav_cantidad:focus {
   border: 1px solid #44a0a1;
-  -webkit-box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
-  -moz-box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
-  box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
+  -webkit-box-shadow: 5px 18px 12px -10px rgba(237, 232, 237, 1);
+  -moz-box-shadow: 5px 18px 12px -10px rgba(237, 232, 237, 1);
+  box-shadow: 5px 18px 12px -10px rgba(237, 232, 237, 1);
 }
 
-#mover_ala_lista_de_deseo{
+#mover_ala_lista_de_deseo {
   color: black;
-  transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out, box-shadow .2s ease-in-out;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
-#mover_ala_lista_de_deseo:hover{
-  color: #44A0A1;
-
+#mover_ala_lista_de_deseo:hover {
+  color: #44a0a1;
 }
 
-#see_offers{
+#see_offers {
   font-size: 12px;
   padding-inline: 10px;
   padding-top: 8px;
@@ -50,16 +49,15 @@ box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
   border: 1px solid #31a0a1;
   color: #1b7b7c;
   font-weight: 500;
-  transition: color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out, box-shadow .2s ease-in-out;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-#see_offers:hover{
-  background: #17696A;
+#see_offers:hover {
+  background: #17696a;
   color: white;
-  border: 1px solid #17696A;
+  border: 1px solid #17696a;
 }
-
-
 
 :host ::ng-deep .dropdown-menu {
   --bs-dropdown-zindex: 1000;
@@ -73,7 +71,9 @@ box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
   --bs-dropdown-border-color: var(--bs-border-color-translucent);
   --bs-dropdown-border-radius: var(--bs-border-radius);
   --bs-dropdown-border-width: var(--bs-border-width);
-  --bs-dropdown-inner-border-radius: calc(var(--bs-border-radius) - var(--bs-border-width));
+  --bs-dropdown-inner-border-radius: calc(
+    var(--bs-border-radius) - var(--bs-border-width)
+  );
   --bs-dropdown-divider-bg: var(--bs-border-color-translucent);
   --bs-dropdown-divider-margin-y: 0.5rem;
   --bs-dropdown-box-shadow: var(--bs-box-shadow);
@@ -81,7 +81,7 @@ box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
   --bs-dropdown-link-hover-color: var(--bs-body-color);
   --bs-dropdown-link-hover-bg: var(--bs-tertiary-bg);
   --bs-dropdown-link-active-color: #fff !important;
-  --bs-dropdown-link-active-bg: #44A0A1;
+  --bs-dropdown-link-active-bg: #44a0a1;
   --bs-dropdown-link-disabled-color: var(--bs-tertiary-color);
   --bs-dropdown-item-padding-x: 1rem;
   --bs-dropdown-item-padding-y: 0.25rem;
@@ -104,7 +104,27 @@ box-shadow: 5px 18px 12px -10px rgba(237,232,237,1);
   border-radius: var(--bs-dropdown-border-radius);
 }
 
-:host ::ng-deep .dropdown-menu{
-
+:host ::ng-deep .dropdown-menu {
   border: var(--bs-dropdown-border-width) solid #dfdfe2;
+}
+
+
+
+
+@media (max-width: 767px) {
+  .navbar-toggler {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .navbar-toggler-icon {
+    background-color: black !important;
+    width: 22px !important;
+    height: 2px !important;
+    border-radius: 0.25rem !important;
+  }
+  .navbar {
+    padding: 12px;
+  }
 }
