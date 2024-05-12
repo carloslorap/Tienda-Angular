@@ -58,7 +58,7 @@
         </div>
 
         <!-- Show / hide filters (off-canvas) on Mobile -->
-        <button type="button" class="btn btn-primary btn-block mt-0 d-lg-none" data-toggle="offcanvas" data-target="filtersOffcanvas">
+        <button (click)="op_modal_filter()" type="button" class="btn btn-primary btn-block mt-0 d-lg-none" data-toggle="offcanvas" data-target="filtersOffcanvas">
           <i class="cxi-filter-2 mr-1"></i>
           Show filters
         </button>
@@ -109,7 +109,7 @@
         <div id="filtersOffcanvas" class="cs-offcanvas cs-offcanvas-collapse">
           <div class="cs-offcanvas-cap align-items-center border-bottom mb-3">
             <h2 class="h5 mb-0">Shop filters</h2>
-            <button class="close mr-n1" type="button" data-dismiss="offcanvas" aria-label="Close">
+            <button class="close mr-n1" type="button" data-dismiss="offcanvas" aria-label="Close" (click)="op_modal_filter()">
               <span class="h2 font-weight-normal mt-n1 mb-0" aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -127,7 +127,7 @@
                 </div>
                 <div class="collapse show" id="filter" aria-labelledby="filter-panel">
                   <div class="cs-widget pl-1 pb-4 mt-n3">
-                    <div class="input-group-overlay  d-lg-block d-none order-lg-3 mt-3">
+                    <div class="input-group-overlay  d-lg-block  order-lg-3 mt-3">
                       <input class="form-control appended-form-control" id="buscador_shop" type="text" placeholder="Search for products..." name="filtro_producto" [(ngModel)]="filtro_producto">
                       <div class="input-group-append-overlay"  style="cursor: pointer;" (click)="buscar_producto()">
                         <span class="input-group-text"><i class="cxi-search lead align-middle"></i></span>

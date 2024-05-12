@@ -17,6 +17,7 @@ export class IndexProductoComponent implements OnInit {
   public token: any = localStorage.getItem('token');
   public config_global: any = {};
 
+  public op_filter = false;
   public filter_categoria = '';
   public wishlistIds: { [productId: string]: boolean } = {};
   public productos: Array<any> = [];
@@ -367,5 +368,16 @@ export class IndexProductoComponent implements OnInit {
 
   isWishlist(productId: string): boolean {
     return this.wishlistIds[productId] || false;
+  }
+
+
+  op_modal_filter(){
+    if (!this.op_filter) {
+      this.op_filter = true;
+      $('#filtersOffcanvas').addClass('show');
+    } else {
+      this.op_filter = false;
+      $('#filtersOffcanvas').removeClass('show');
+    }
   }
 }
