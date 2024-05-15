@@ -380,4 +380,9 @@ export class IndexProductoComponent implements OnInit {
       $('#filtersOffcanvas').removeClass('show');
     }
   }
+
+  funcion_test(){
+    console.log("solo es una prueba");
+
+  }
 }
